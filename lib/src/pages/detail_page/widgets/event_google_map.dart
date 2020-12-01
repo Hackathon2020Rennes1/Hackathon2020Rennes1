@@ -8,14 +8,14 @@ class MapEvent extends StatefulWidget {
 
   MapEvent({
     @required this.eventName,
-    @required this.eventName,
+    @required this.description,
     @required this.latitude,
     @required this.longitude,
     Key key,
   }) : super(key: key);
 
-  String eventName, description;
-  double latitude, longitude;
+  final String eventName, description;
+  final double latitude, longitude;
 
   @override
   State<MapEvent> createState() => MapEventState();
@@ -24,7 +24,6 @@ class MapEvent extends StatefulWidget {
 
 class MapEventState extends State<MapEvent> {
 
-  MapEventState(){}
   GoogleMapController _googleMapController;
 
   final Set<Marker> _markers = HashSet<Marker>();
@@ -34,15 +33,18 @@ class MapEventState extends State<MapEvent> {
   void _onMapCreated(GoogleMapController controller){
     _googleMapController = controller;
     setState((){
-          _markers.add(
-              Marker(
-                  markerId:MarkerId((nextMarkerId++).toString()),
-                  position: LatLng(widget.latitude,widget.longitude),
-                  infoWindow: InfoWindow(
-                    title: widget.eventName,
-                    snippet: widget.description)
-          ));
-        }
+      _markers
+        ..clear()
+        ..add(
+          Marker(
+            markerId:MarkerId((nextMarkerId++).toString()),
+            position: LatLng(widget.latitude,widget.longitude),
+            infoWindow: InfoWindow(
+              title: widget.eventName,
+              snippet: widget.description)
+          )
+        );
+      }
     );
   }
 
