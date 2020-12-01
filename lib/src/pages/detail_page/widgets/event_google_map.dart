@@ -1,11 +1,9 @@
-
-
 import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapEvent extends StatefulWidget {
-
   MapEvent({
     @required this.eventName,
     @required this.description,
@@ -21,7 +19,6 @@ class MapEvent extends StatefulWidget {
   State<MapEvent> createState() => MapEventState();
 }
 
-
 class MapEventState extends State<MapEvent> {
 
   GoogleMapController _googleMapController;
@@ -30,7 +27,7 @@ class MapEventState extends State<MapEvent> {
 
   static int nextMarkerId = 1;
 
-  void _onMapCreated(GoogleMapController controller){
+  void _onMapCreated(GoogleMapController controller) {
     _googleMapController = controller;
     setState((){
       _markers
@@ -50,11 +47,10 @@ class MapEventState extends State<MapEvent> {
 
   @override
   Widget build(BuildContext context) {
-
     return GoogleMap(
       initialCameraPosition: CameraPosition(
-        target: LatLng(widget.latitude,widget.longitude),
-        zoom:14,
+        target: LatLng(widget.latitude, widget.longitude),
+        zoom: 14,
       ),
       onMapCreated: _onMapCreated,
       markers: _markers,
