@@ -14,11 +14,15 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xff2E4053),
       body: SafeArea(
-        child: IconButton(
-          icon: const Icon(Icons.power_settings_new),
-          onPressed: () {
-            context.read<AuthService>().signOut();
-          },
+        child: Column(
+          children: [
+            IconButton(
+              icon: const Icon(Icons.power_settings_new),
+              onPressed: () {
+                context.read<AuthService>().signOut();
+              },
+            ),
+          ],
         ),
       ),
     );

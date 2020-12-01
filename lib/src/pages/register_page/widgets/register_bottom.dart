@@ -3,25 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../services/firebase_services/auth_service.dart';
-import '../../../wrappers/auth_wrapper/auth_wrapper.dart';
+import '../models/register_input_controller_model.dart';
 
 class RegisterBottom extends StatelessWidget {
   const RegisterBottom({
-    @required TextEditingController emailController,
-    @required TextEditingController passwordController,
-    @required TextEditingController pseudoController,
-    @required TextEditingController photoUrlController,
     Key key,
-  })  : _emailController = emailController,
-        _passwordController = passwordController,
-        _pseudoController = pseudoController,
-        _photoUrlController = photoUrlController,
-        super(key: key);
-
-  final TextEditingController _emailController;
-  final TextEditingController _passwordController;
-  final TextEditingController _pseudoController;
-  final TextEditingController _photoUrlController;
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +20,12 @@ class RegisterBottom extends StatelessWidget {
           RaisedButton.icon(
             onPressed: () {
               context.read<AuthService>().signUp(
-                    email: _emailController.text.trim(),
-                    password: _passwordController.text.trim(),
-                    pseudo: _pseudoController.text.trim(),
-                    photoUrl: _photoUrlController.text.trim(),
+                    email: context.read<RegisterInputControllerModel>().emailController.text.trim(),
+                    password: context.read<RegisterInputControllerModel>().passwordController.text.trim(),
+                    pseudo: context.read<RegisterInputControllerModel>().pseudoController.text.trim(),
+                    photoUrl: context.read<RegisterInputControllerModel>().photoUrlController.text.trim(),
                   );
               Navigator.pop(context);
-              Navigator.push<AuthWrapper>(context, MaterialPageRoute<AuthWrapper>(builder: (context) => const AuthWrapper()));
             },
             icon: const Icon(Icons.arrow_forward_rounded),
             label: const Text('Inscription'),

@@ -9,7 +9,7 @@ import '../models/login_input_controller_model.dart';
 class LoginBottom extends StatelessWidget {
   const LoginBottom({
     Key key,
-  })  : super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

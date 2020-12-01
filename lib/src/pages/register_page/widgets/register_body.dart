@@ -1,25 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../widgets_generic/text_form_field_custom.dart';
+import '../models/register_input_controller_model.dart';
 
 class RegisterBody extends StatelessWidget {
   const RegisterBody({
-    @required TextEditingController emailController,
-    @required TextEditingController passwordController,
-    @required TextEditingController pseudoController,
-    @required TextEditingController photoUrlController,
     Key key,
-  })  : _emailController = emailController,
-        _passwordController = passwordController,
-        _pseudoController = pseudoController,
-        _photoUrlController = photoUrlController,
-        super(key: key);
-
-  final TextEditingController _emailController;
-  final TextEditingController _passwordController;
-  final TextEditingController _pseudoController;
-  final TextEditingController _photoUrlController;
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,25 +33,25 @@ class RegisterBody extends StatelessWidget {
                 Column(
                   children: [
                     TextFormFieldCustom(
-                      controller: _emailController,
+                      controller: context.watch<RegisterInputControllerModel>().emailController,
                       textInputType: TextInputType.emailAddress,
                       hintText: 'Email',
                       obscureText: false,
                     ),
                     TextFormFieldCustom(
-                      controller: _passwordController,
+                      controller: context.watch<RegisterInputControllerModel>().passwordController,
                       textInputType: TextInputType.text,
                       hintText: 'Mot de passe',
                       obscureText: true,
                     ),
                     TextFormFieldCustom(
-                      controller: _pseudoController,
+                      controller: context.watch<RegisterInputControllerModel>().pseudoController,
                       textInputType: TextInputType.text,
                       hintText: 'Pseudo',
                       obscureText: false,
                     ),
                     TextFormFieldCustom(
-                      controller: _photoUrlController,
+                      controller: context.watch<RegisterInputControllerModel>().photoUrlController,
                       textInputType: TextInputType.text,
                       hintText: 'URL photo',
                       obscureText: false,

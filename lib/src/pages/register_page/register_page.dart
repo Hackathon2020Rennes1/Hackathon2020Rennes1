@@ -15,7 +15,7 @@ class RegisterPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xff2E4060),
       ),
-      body: SafeArea(
+      body: const SafeArea(
         child: RegisterMain(),
       ),
     );

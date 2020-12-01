@@ -25,10 +25,7 @@ class LoginMain extends StatelessWidget {
       child: Provider(
         create: (_) => LoginInputControllerModel(),
         child: Column(
-          children: const [
-            LoginBody(),
-            LoginBottom()
-          ],
+          children: const [LoginBody(), LoginBottom()],
         ),
       ),
     );
