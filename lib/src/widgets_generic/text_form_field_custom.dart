@@ -39,7 +39,7 @@ class TextFormFieldCustom extends StatelessWidget {
               ),
               validator: (value) {
                 if (value.isEmpty) {
-                  return 'Valeur manquate.';
+                  return 'Valeur manquante.';
                 }
 
                 if (_validator != null) {
