@@ -1,5 +1,4 @@
 
-import 'dart:async';
 
 import 'dart:collection';
 import 'package:flutter/material.dart';
@@ -8,29 +7,28 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class MapEvent extends StatefulWidget {
 
   @override
-  State<MapEvent> createState() {
-
-    String event_name, description;
-    double latitude, longitude;
-
-    return MapSampleState(event_name,description,latitude,longitude);
-  }
+  State<MapEvent> createState() => MapSampleState();
 }
 
 
 class MapSampleState extends State<MapEvent> {
 
-  MapSampleState(this.event_name,this.description,this.latitude,this.longitude);
-
+  //MapSampleState(this.eventName,this.description,this.latitude,this.longitude);
+  MapSampleState(){
+    eventName = 'eventName';
+    description = 'description';
+    latitude = 2;
+    longitude = 2;
+  }
   GoogleMapController _googleMapController;
 
   final Set<Marker> _markers = HashSet<Marker>();
 
   //final dbRef = FirebaseDatabase.instance.reference().child("");
 
-  static int next_marker_id = 1;
+  static int nextMarkerId = 1;
 
-  String event_name, description;
+  String eventName, description;
   double latitude, longitude;
 
   void _onMapCreated(GoogleMapController controller){
@@ -38,10 +36,10 @@ class MapSampleState extends State<MapEvent> {
     setState((){
           _markers.add(
               Marker(
-                  markerId:MarkerId((next_marker_id++).toString()),
+                  markerId:MarkerId((nextMarkerId++).toString()),
                   position: LatLng(latitude,longitude),
                   infoWindow: InfoWindow(
-                    title: event_name,
+                    title: eventName,
                     snippet: description)
           ));
         }
@@ -51,9 +49,9 @@ class MapSampleState extends State<MapEvent> {
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
-      mapType: MapType.normal,
+      //mapType: MapType.normal,
       initialCameraPosition: CameraPosition(
-        target: LatLng(5,5),
+        target: LatLng(latitude,longitude),
         zoom:14,
       ),
       onMapCreated: _onMapCreated,
