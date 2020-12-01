@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'widgets/login_main.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({
     Key key,
@@ -8,10 +10,10 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xff2E4053),
+    return const Scaffold(
+      backgroundColor: Color(0xff2E4053),
       body: SafeArea(
-        child: Container(),
+        child: LoginMain(),
       ),
     );
   }
