@@ -21,7 +21,7 @@ class App extends StatelessWidget {
         )
       ],
       child: MaterialApp(
-        title: 'Flutter TP3',
+        title: 'Fête ta science !',
         theme: ThemeData(
           primarySwatch: Colors.blueGrey,
           visualDensity: VisualDensity.adaptivePlatformDensity,
