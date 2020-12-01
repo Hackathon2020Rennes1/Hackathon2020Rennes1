@@ -3,9 +3,19 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-//import 'package:firebase_database/firebase_database.dart';
 
 class MapEvent extends StatefulWidget {
+
+  MapEvent({
+    @required this.eventName,
+    @required this.eventName,
+    @required this.latitude,
+    @required this.longitude,
+    Key key,
+  }) : super(key: key);
+
+  String eventName, description;
+  double latitude, longitude;
 
   @override
   State<MapEvent> createState() => MapEventState();
@@ -14,21 +24,12 @@ class MapEvent extends StatefulWidget {
 
 class MapEventState extends State<MapEvent> {
 
-  //MapSampleState(this.eventName,this.description,this.latitude,this.longitude);
-  MapEventState(){
-    eventName = 'eventName';
-    description = 'description';
-    latitude = 2;
-    longitude = 2;
-  }
+  MapEventState(){}
   GoogleMapController _googleMapController;
 
   final Set<Marker> _markers = HashSet<Marker>();
 
   static int nextMarkerId = 1;
-
-  String eventName, description;
-  double latitude, longitude;
 
   void _onMapCreated(GoogleMapController controller){
     _googleMapController = controller;
@@ -36,10 +37,10 @@ class MapEventState extends State<MapEvent> {
           _markers.add(
               Marker(
                   markerId:MarkerId((nextMarkerId++).toString()),
-                  position: LatLng(latitude,longitude),
+                  position: LatLng(widget.latitude,widget.longitude),
                   infoWindow: InfoWindow(
-                    title: eventName,
-                    snippet: description)
+                    title: widget.eventName,
+                    snippet: widget.description)
           ));
         }
     );
@@ -47,9 +48,10 @@ class MapEventState extends State<MapEvent> {
 
   @override
   Widget build(BuildContext context) {
+
     return GoogleMap(
       initialCameraPosition: CameraPosition(
-        target: LatLng(latitude,longitude),
+        target: LatLng(widget.latitude,widget.longitude),
         zoom:14,
       ),
       onMapCreated: _onMapCreated,
