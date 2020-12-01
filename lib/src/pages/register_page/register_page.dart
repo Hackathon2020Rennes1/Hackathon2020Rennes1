@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'widgets/register_main.dart';
+
 class RegisterPage extends StatelessWidget {
   const RegisterPage({
     Key key,
@@ -10,8 +12,11 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff2E4053),
-      body: SafeArea(
-        child: Container(),
+      appBar: AppBar(
+        backgroundColor: const Color(0xff2E4060),
+      ),
+      body: const SafeArea(
+        child: RegisterMain(),
       ),
     );
   }
