@@ -19,13 +19,15 @@ class RegisterBottom extends StatelessWidget {
         children: [
           RaisedButton.icon(
             onPressed: () {
-              context.read<AuthService>().signUp(
-                    email: context.read<RegisterInputControllerModel>().emailController.text.trim(),
-                    password: context.read<RegisterInputControllerModel>().passwordController.text.trim(),
-                    pseudo: context.read<RegisterInputControllerModel>().pseudoController.text.trim(),
-                    photoUrl: context.read<RegisterInputControllerModel>().photoUrlController.text.trim(),
-                  );
-              Navigator.pop(context);
+              if (context.read<GlobalKey<FormState>>().currentState.validate()) {
+                context.read<AuthService>().signUp(
+                      email: context.read<RegisterInputControllerModel>().emailController.text.trim(),
+                      password: context.read<RegisterInputControllerModel>().passwordController.text.trim(),
+                      pseudo: context.read<RegisterInputControllerModel>().pseudoController.text.trim(),
+                      photoUrl: context.read<RegisterInputControllerModel>().photoUrlController.text.trim(),
+                    );
+                Navigator.pop(context);
+              }
             },
             icon: const Icon(Icons.arrow_forward_rounded),
             label: const Text('Inscription'),

@@ -22,8 +22,11 @@ class LoginMain extends StatelessWidget {
           currentFocus.unfocus();
         }
       },
-      child: Provider(
-        create: (_) => LoginInputControllerModel(),
+      child: MultiProvider(
+        providers: [
+          Provider<GlobalKey<FormState>>(create: (_) => GlobalKey<FormState>()),
+          Provider<LoginInputControllerModel>(create: (_) => LoginInputControllerModel()),
+        ],
         child: Column(
           children: const [LoginBody(), LoginBottom()],
         ),
