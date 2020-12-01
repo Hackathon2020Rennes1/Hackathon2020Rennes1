@@ -3,18 +3,19 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+//import 'package:firebase_database/firebase_database.dart';
 
 class MapEvent extends StatefulWidget {
 
   @override
-  State<MapEvent> createState() => MapSampleState();
+  State<MapEvent> createState() => MapEventState();
 }
 
 
-class MapSampleState extends State<MapEvent> {
+class MapEventState extends State<MapEvent> {
 
   //MapSampleState(this.eventName,this.description,this.latitude,this.longitude);
-  MapSampleState(){
+  MapEventState(){
     eventName = 'eventName';
     description = 'description';
     latitude = 2;
@@ -23,8 +24,6 @@ class MapSampleState extends State<MapEvent> {
   GoogleMapController _googleMapController;
 
   final Set<Marker> _markers = HashSet<Marker>();
-
-  //final dbRef = FirebaseDatabase.instance.reference().child("");
 
   static int nextMarkerId = 1;
 
@@ -49,7 +48,6 @@ class MapSampleState extends State<MapEvent> {
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
-      //mapType: MapType.normal,
       initialCameraPosition: CameraPosition(
         target: LatLng(latitude,longitude),
         zoom:14,
