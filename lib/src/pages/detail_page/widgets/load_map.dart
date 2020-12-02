@@ -105,7 +105,6 @@ class CreateFromDocumentSnapshot extends StatelessWidget {
           }
 
           if (snapshot.connectionState == ConnectionState.done) {
-            print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             return create(snapshot.data);
           }
 
