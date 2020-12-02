@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fete_ta_science/src/pages/list_own_tour_page/list_own_tour_page.dart';
 import 'package:fete_ta_science/src/pages/list_public_tour_page/list_public_tour_page.dart';
+import 'package:fete_ta_science/src/pages/map_of_all_events_page/map.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -89,7 +90,8 @@ class HomeDrawer extends StatelessWidget {
               ),
               RaisedButton.icon(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute<void>(builder: (context) => DetailPage(eventId: 'b217feb0-33bb-11eb-9251-aff80825ebfe')));
+                  //Navigator.push(context, MaterialPageRoute<void>(builder: (context) => DetailPage(eventId: 'b217feb0-33bb-11eb-9251-aff80825ebfe')));
+                  Navigator.push(context, MaterialPageRoute<void>(builder: (context) => MapEvents()));
                 },
                 icon: const Icon(Icons.place_outlined),
                 label: const Text('Carte interactive', style: TextStyle(fontSize: 17)),

@@ -1,15 +1,21 @@
 
+import 'package:fete_ta_science/src/pages/detail_page/model/event.dart';
+import 'package:fete_ta_science/src/pages/tour_page/widgets/event_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/src/layer/marker_layer.dart' as ml;
 import 'package:latlong/latlong.dart' as lt;
 
+
+
+
 class LocationLabel extends StatelessWidget {
 
-  LocationLabel(this.eventName,this.description,this.height);
+  LocationLabel(this.event,this.height);
 
-  String eventName, description;
+  EventMapData event;
+
   double height;
 
   @override
@@ -23,9 +29,9 @@ class LocationLabel extends StatelessWidget {
                   height:height-20,
                   child:ListView(
                       children:[
-                        Text(eventName),
-                        Divider(color: Colors.grey, thickness: 2),
-                        Text(description),
+                        Text(event.name),
+                        //Divider(color: Colors.grey, thickness: 2),
+                        //Text(event.description),
                       ]
                   )
               ),
@@ -36,42 +42,50 @@ class LocationLabel extends StatelessWidget {
   }
 }
 
-class flutterMapEvent extends StatelessWidget {
-  flutterMapEvent({@required this.eventName, @required this.description, @required this.latitude, @required this.longitude, Key key})
-      : super(key: key);
+class flutterMapEvent extends StatefulWidget{
 
-  final String eventName, description;
+  flutterMapEvent({
+    @required this.events,
+    @required this.latitude,
+    @required this.longitude,
+    this.onPositionCranged = null,
+    Key key,
+  }) : super(key: key);
+
   final double latitude, longitude;
 
-  @override
-  Widget build(BuildContext context) {
+  List<EventMapData> events;
 
-    return FlutterMap(
-      options: MapOptions(
-        center: lt.LatLng(latitude, longitude),
-        zoom: 13.0,
-      ),
-      layers: [
-        TileLayerOptions(
-            urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-            subdomains: ['a', 'b', 'c']
-        ),
-        MarkerLayerOptions(
-          markers: [
-            ml.Marker(
-              width: 10.0,
-              height: 10,
-              point: lt.LatLng(latitude, longitude),
-              builder: (ctx) => Container(
-                width: 300.0,
-                height: 300.0,
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  shape: BoxShape.circle,
-                ),
+  void Function(MapPosition position, bool hasGesture) onPositionCranged;
+
+  @override
+  State<flutterMapEvent> createState() => flutterMapEventState();
+
+}
+
+class flutterMapEventState extends State<flutterMapEvent> {
+
+  var _markers = List<ml.Marker>();
+
+  void update(){
+    for(var e in widget.events){
+      _markers.add(
+          ml.Marker(
+            width: 12.0,
+            height: 12,
+            point: lt.LatLng(e.latitude, e.longitude),
+            builder: (ctx) => Container(
+              width: 300.0,
+              height: 300.0,
+              decoration: BoxDecoration(
+                color: Colors.green,
+                shape: BoxShape.circle,
               ),
             ),
-            ml.Marker(
+          )
+      );
+      /*
+      ml.Marker(
               width: 120.0,
               height: 90.0,
               point: lt.LatLng(latitude, longitude),
@@ -79,9 +93,40 @@ class flutterMapEvent extends StatelessWidget {
               LocationLabel(eventName,description,90),
                 anchorPos: ml.AnchorPos.align(AnchorAlign.top)
             ),
-          ],
+       */
+    }
+  }
+
+  @override
+  void initState(){
+    update();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    return FlutterMap(
+      options: MapOptions(
+        center: lt.LatLng(widget.latitude, widget.longitude),
+        zoom: 13.0,
+          onPositionChanged:(MapPosition position, bool hasGesture){
+            if(widget.onPositionCranged!=null){
+              widget.onPositionCranged(position,hasGesture);
+              update();
+            }
+          }
+      ),
+      layers: [
+        TileLayerOptions(
+            urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            subdomains: ['a', 'b', 'c']
+        ),
+        MarkerLayerOptions(
+          markers: _markers,
         ),
       ],
+
     );
   }
 }

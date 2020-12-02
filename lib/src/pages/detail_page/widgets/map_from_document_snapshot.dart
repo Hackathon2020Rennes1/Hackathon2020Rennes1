@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fete_ta_science/src/pages/detail_page/model/event.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,32 +13,15 @@ class MapFromDocumentSnapshot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> data = documentSnapshot.data();
-    print("MapFromDocumentSnapshot event data : " + data.toString());
-
-    dynamic point = documentSnapshot.get(FieldPath(['geometry', 'coordinates']));
-    //print("MapFromDocumentSnapshot events['geometry', 'coordinates'] = " + point.toString());
-
-    String eventName = documentSnapshot.get(FieldPath(['fields', 'titre_fr'])).toString();
-    //String eventName = documentSnapshot.get(FieldPath(['fields', 'nom_du_lieu'])).toString();
-    String description = documentSnapshot.get(FieldPath(['fields', 'description_fr'])).toString();
-    double latitude = double.parse(point[1].toString());
-    double longitude = double.parse(point[0].toString());
-
-    /*print("MapFromDocumentSnapshot events eventName =[" +
-        eventName +
-        "] description = [" +
-        description +
-        "] latitude=[" +
-        latitude.toString() +
-        "] longitude=[" +
-        longitude.toString() +
-        "]");*/
 
     // version google map
     //return GoogleMapForEvent(eventName: eventName, description: description, latitude: latitude, longitude: longitude);
 
-    return flutterMapEvent(eventName: eventName, description: description, latitude: latitude, longitude: longitude);
+    var events = List<EventMapData>();
+    //events.add(EventMapData.fromDocumentSnapshot(eventName,latitude,longitude));
+    events.add(EventMapData.fromDocumentSnapshot(documentSnapshot));
+
+    return flutterMapEvent(events:events, latitude:events[0].latitude, longitude:events[0].longitude);
   }
 }
 
