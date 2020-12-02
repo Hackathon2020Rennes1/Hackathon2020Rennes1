@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fete_ta_science/src/pages/list_own_tour_page/list_own_tour_page.dart';
+import 'package:fete_ta_science/src/pages/list_public_tour_page/list_public_tour_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -61,14 +63,24 @@ class HomeDrawer extends StatelessWidget {
                 ],
               ),
               RaisedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (contex)=>ListPublicTourPage())
+                  );
+                },
                 icon: const Icon(Icons.directions_walk),
                 label: const Text('Liste des parcours publiques', style: TextStyle(fontSize: 17)),
                 padding: const EdgeInsets.only(top: 15, bottom: 15),
                 shape: const RoundedRectangleBorder(),
               ),
               RaisedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (contex)=>ListOwnTourPage(userId:_firebaseUser.uid))
+                  );
+                },
                 icon: const Icon(Icons.directions_run),
                 label: const Text('Mes parcours', style: TextStyle(fontSize: 17), textAlign: TextAlign.start,),
                 padding: const EdgeInsets.only(top: 15, bottom: 15),

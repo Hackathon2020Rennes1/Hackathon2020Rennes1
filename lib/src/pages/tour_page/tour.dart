@@ -22,12 +22,6 @@ class TourWidget extends StatelessWidget {
           Expanded(
             child: EventListWidget(tourId: id),
           ),
-          IconButton(
-            icon: Icon(Icons.add_circle),
-            onPressed: () {
-              // aller à une selection d'events pour l'ajouter à ce tour
-            },
-          )
         ],
       ),
     );

@@ -14,6 +14,8 @@ class Event {
         ;
   }
 
+  Event.fromDocumentSnapshot(this.data);
+
   DocumentSnapshot data;
 
   dynamic getField(String member) {
