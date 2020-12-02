@@ -25,7 +25,7 @@ class ListOwnTourPage extends StatelessWidget {
             icon: Icon(Icons.add_circle),
             onPressed: () {
               // creer un nouveau chemin et aller à l'écran de ce chemin (tour)
-              FirebaseFirestore.instance.collection('users').add({
+              FirebaseFirestore.instance.collection('tours').add({
                 'owner': userId,
               })
               .then((DocumentReference newTour) {
