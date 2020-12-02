@@ -1,11 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'dart:collection';
-import 'dart:async';
-import 'package:flutter/material.dart';
+
 //import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-
 
 /*class flutterMapEvent extends StatelessWidget{
 

@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../services/firebase_services/auth_service.dart';
+import '../detail_page/detail_page.dart';
+import 'widgets/home_drawer.dart';
+import 'widgets/home_main.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -15,29 +16,16 @@ class HomePage extends StatelessWidget {
       backgroundColor: const Color(0xff2E4053),
       appBar: AppBar(
         backgroundColor: const Color(0xff2E4060),
+        title: const Text('Liste des évènements'),
       ),
-      //drawer: const HomeDrawer(),
-      //body: const HomeMain(),
-      body: SafeArea(
-        child: Column(
-          children: [
-            IconButton(
-              icon: const Icon(Icons.power_settings_new),
-              onPressed: () {
-                context.read<AuthService>().signOut();
-              },
-            ),
-            TextButton(
-              child: Text("test event detail page"),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(builder: (context) => DetailPage(eventId : 'b217feb0-33bb-11eb-9251-aff80825ebfe'))
-                );
-              },
-            ),
-          ],
-        ),
+      drawer: const HomeDrawer(),
+      body: const HomeMain(),
+      // Temporaire pour vos tests
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute<void>(builder: (context) => DetailPage(eventId: 'b217feb0-33bb-11eb-9251-aff80825ebfe')));
+        },
+        child: const Icon(Icons.arrow_forward_rounded),
       ),
     );
   }

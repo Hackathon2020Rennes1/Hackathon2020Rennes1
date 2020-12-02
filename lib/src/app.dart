@@ -1,4 +1,3 @@
-import 'package:fete_ta_science/src/pages/detail_page/detail_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
