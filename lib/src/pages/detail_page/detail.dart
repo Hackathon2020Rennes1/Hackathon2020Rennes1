@@ -149,21 +149,50 @@ class Detail extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 5),
                         ),
-                        RatingBar.builder(
-                          initialRating: 0,
-                          minRating: 1,
-                          direction: Axis.horizontal,
-                          allowHalfRating: true,
-                          itemCount: 5,
-                          itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                          itemBuilder: (context, _) => Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          onRatingUpdate: (rating) {
-                            print(rating);
-                          },
+                        Row(
+                          children: [
+                            Text(
+                              'Noter : ',
+                              style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                            ),
+                            RatingBar.builder(
+                              initialRating: 0,
+                              minRating: 1,
+                              direction: Axis.horizontal,
+                              allowHalfRating: true,
+                              itemCount: 5,
+                              itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
+                              itemBuilder: (context, _) => Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                                size: 18,
+                              ),
+                              onRatingUpdate: (rating) {
+                                print(rating);
+                              },
+                            ),
+                            Padding(padding: const EdgeInsets.only(left: 10.0),),
+                            Column(
+                              children: [
+
+                                Row(
+                                  children: [
+                                    Text('4.5'),
+                                    Icon(
+                                      Icons.star,
+                                      size: 15,
+                                    )
+                                  ],
+                                ),
+
+                                Text('145 avis')
+                              ],
+                            )
+                          ],
+
                         ),
+
+
                         Padding(
                           padding: const EdgeInsets.only(top: 10),
                         ),
