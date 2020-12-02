@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class EventInfos {
+class Event {
 
-  EventInfos.fromId(String id){
+  Event.fromId(String id){
     FirebaseFirestore.instance
         .collection('events')
         .doc(id)
@@ -36,7 +36,7 @@ class EventListWidget extends StatelessWidget {
 
   String tourId;
 
-  List<EventInfos> events = List<EventInfos>();
+  List<Event> events = List<Event>();
 
   @override
   Widget build(BuildContext context) {

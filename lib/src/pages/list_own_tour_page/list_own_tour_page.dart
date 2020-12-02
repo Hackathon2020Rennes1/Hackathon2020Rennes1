@@ -25,22 +25,24 @@ class ListOwnTourPage extends StatelessWidget {
               icon: Icon(Icons.add_circle),
               onPressed: () {
                 // creer un nouveau chemin et aller à l'écran de ce chemin (tour)
-                FirebaseFirestore.instance.collection('tours').add({
-                  'owner': userId,
-                })
-                .then((DocumentReference newTour) {
-                    Navigator.push(// aller dans la page TourWidget
-                      context,
-                      MaterialPageRoute(builder: (contex)=>TourWidget(id:newTour.id))
-                    );
-                    final snackBar = SnackBar(content: Text('new tour created !'));
-                    Scaffold.of(context).showSnackBar(snackBar);
-                  }
-                )
-                .catchError((value) {
-                  final snackBar = SnackBar(content: Text('error tour creation failed !'));
-                  Scaffold.of(context).showSnackBar(snackBar);
-                });
+                FirebaseFirestore.instance
+                    .collection('tours')
+                    .add({
+                      'owner': userId,
+                    })
+                    .then((DocumentReference newTour) {
+                        Navigator.push(// aller dans la page TourWidget
+                          context,
+                          MaterialPageRoute(builder: (contex)=>TourWidget(id:newTour.id))
+                        );
+                        final snackBar = SnackBar(content: Text('new tour created !'));
+                        Scaffold.of(context).showSnackBar(snackBar);
+                      }
+                    )
+                    .catchError((value) {
+                      final snackBar = SnackBar(content: Text('error tour creation failed !'));
+                      Scaffold.of(context).showSnackBar(snackBar);
+                    });
               },
             )
         ],

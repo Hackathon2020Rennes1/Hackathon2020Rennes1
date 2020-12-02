@@ -8,7 +8,7 @@ class Tour {
 
   DocumentSnapshot snapshot;
 
-  var events = List<EventInfos>();
+  var events = List<Event>();
 
   String stringEvents() {
     return events.join(', ');
@@ -16,7 +16,7 @@ class Tour {
 
   Tour(this.snapshot){
     for(int i = 0; i<snapshot.data().length;i++){
-      events.add(EventInfos.fromId(snapshot[i].toString()));
+      events.add(Event.fromId(snapshot[i].toString()));
     }
   }
 }
