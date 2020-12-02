@@ -17,15 +17,17 @@ class HomeMain extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
-        return ListView(
-          children: snapshot.data.docs.map((document) {
-            return Card(
-              child: ListTile(
-                contentPadding: const EdgeInsets.only(left: 10, top: 5, bottom: 5),
-                title: document.data().containsKey('fields') ? Text(document['fields']['titre_fr'].toString()) : const Text(''),
-              ),
-            );
-          }).toList(),
+        return Scrollbar(
+          child: ListView(
+            children: snapshot.data.docs.map((document) {
+              return Card(
+                child: ListTile(
+                  contentPadding: const EdgeInsets.only(left: 10, top: 5, bottom: 5),
+                  title: document.data().containsKey('fields') ? Text(document['fields']['titre_fr'].toString()) : const Text(''),
+                ),
+              );
+            }).toList(),
+          ),
         );
       },
     );

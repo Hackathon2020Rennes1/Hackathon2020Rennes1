@@ -1,5 +1,6 @@
-import 'dart:collection';
 import 'dart:async';
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -20,7 +21,6 @@ class MapEvent extends StatefulWidget {
 }
 
 class MapEventState extends State<MapEvent> {
-
   //GoogleMapController _googleMapController;
   Completer<GoogleMapController> _googleMapController = Completer();
 
@@ -30,20 +30,14 @@ class MapEventState extends State<MapEvent> {
 
   void _onMapCreated(GoogleMapController controller) {
     _googleMapController.complete(controller);
-    setState((){
+    setState(() {
       _markers
         ..clear()
-        ..add(
-          Marker(
-            markerId:MarkerId((nextMarkerId++).toString()),
-            position: LatLng(widget.latitude,widget.longitude),
-            infoWindow: InfoWindow(
-              title: widget.eventName,
-              snippet: widget.description)
-          )
-        );
-      }
-    );
+        ..add(Marker(
+            markerId: MarkerId((nextMarkerId++).toString()),
+            position: LatLng(widget.latitude, widget.longitude),
+            infoWindow: InfoWindow(title: widget.eventName, snippet: widget.description)));
+    });
   }
 
   @override
@@ -69,23 +63,17 @@ class MapEventState extends State<MapEvent> {
     );*/
 
     return Scaffold(
-        body: Row(
-          children:[
-            Expanded(
-                child:Text("TEST")
-            ),
-            Expanded(
-              child: GoogleMap(
-                initialCameraPosition: CameraPosition(
-                  target: LatLng(50, 50),
-                  zoom: 14,
-                ),
-                onMapCreated: _onMapCreated,
-                markers: _markers,
-              )
-            )
-          ]
-        )
-    );
+        body: Row(children: [
+      Expanded(child: Text("TEST")),
+      Expanded(
+          child: GoogleMap(
+        initialCameraPosition: CameraPosition(
+          target: LatLng(50, 50),
+          zoom: 14,
+        ),
+        onMapCreated: _onMapCreated,
+        markers: _markers,
+      ))
+    ]));
   }
 }

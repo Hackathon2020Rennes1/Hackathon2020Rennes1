@@ -20,12 +20,15 @@ class RegisterBottom extends StatelessWidget {
           RaisedButton.icon(
             onPressed: () {
               if (context.read<GlobalKey<FormState>>().currentState.validate()) {
-                context.read<AuthService>().signUp(
+                context
+                    .read<AuthService>()
+                    .signUp(
                       email: context.read<RegisterInputControllerModel>().emailController.text.trim(),
                       password: context.read<RegisterInputControllerModel>().passwordController.text.trim(),
                       pseudo: context.read<RegisterInputControllerModel>().pseudoController.text.trim(),
                       photoUrl: context.read<RegisterInputControllerModel>().photoUrlController.text.trim(),
-                    ).then((value) {
+                    )
+                    .then((value) {
                   if (value == 'Signed up') {
                     // Ne fonctionne pas, mieux vaut utiliser un StatefulWidget et dispose()
                     //context.read<RegisterInputControllerModel>().dispose();
