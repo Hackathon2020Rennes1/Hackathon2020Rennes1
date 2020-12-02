@@ -14,7 +14,7 @@ class flutterMapEvent extends StatelessWidget{
       @required this.eventName,
       @required this.description,
       @required this.latitude,
-      @required this.longitude}){}
+      @required this.longitude, Key key}): super(key: key);
 
   final String eventName, description;
   final double latitude, longitude;

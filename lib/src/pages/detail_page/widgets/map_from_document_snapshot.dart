@@ -58,6 +58,7 @@ class CreateFromDocumentSnapshot extends StatelessWidget {
     return FutureBuilder<DocumentSnapshot>(
         future: events.doc(id).get(),
         builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+
           if (snapshot.hasError) {
             return Text("Something went wrong, no DocumentSnapshot received from data-base");
           }

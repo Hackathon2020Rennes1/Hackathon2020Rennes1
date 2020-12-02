@@ -13,6 +13,11 @@ class EventData{
 
   final String eventName, description;
   final double latitude, longitude;
+
+  @override
+  String toString(){
+    return eventName;
+  }
 }
 
 
