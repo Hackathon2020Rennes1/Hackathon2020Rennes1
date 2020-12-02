@@ -25,8 +25,13 @@ class RegisterBottom extends StatelessWidget {
                       password: context.read<RegisterInputControllerModel>().passwordController.text.trim(),
                       pseudo: context.read<RegisterInputControllerModel>().pseudoController.text.trim(),
                       photoUrl: context.read<RegisterInputControllerModel>().photoUrlController.text.trim(),
-                    );
-                Navigator.pop(context);
+                    ).then((value) {
+                  if (value == 'Signed up') {
+                    // Ne fonctionne pas, mieux vaut utiliser un StatefulWidget et dispose()
+                    //context.read<RegisterInputControllerModel>().dispose();
+                    Navigator.pop(context);
+                  }
+                });
               }
             },
             icon: const Icon(Icons.arrow_forward_rounded),

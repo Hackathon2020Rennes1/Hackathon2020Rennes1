@@ -21,10 +21,18 @@ class LoginBottom extends StatelessWidget {
           RaisedButton.icon(
             onPressed: () {
               if (context.read<GlobalKey<FormState>>().currentState.validate()) {
-                context.read<AuthService>().signIn(
+                context
+                    .read<AuthService>()
+                    .signIn(
                       email: context.read<LoginInputControllerModel>().emailController.text.trim(),
                       password: context.read<LoginInputControllerModel>().passwordController.text.trim(),
-                    );
+                    )
+                    .then((value) {
+                  if (value == 'Signed in') {
+                    // Ne fonctionne pas, mieux vaut utiliser un StatefulWidget et dispose()
+                    //context.read<LoginInputControllerModel>().dispose();
+                  }
+                });
               }
             },
             icon: const Icon(Icons.arrow_forward_rounded),

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../services/firebase_services/auth_service.dart';
+import 'widgets/home_drawer.dart';
+import 'widgets/home_main.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -13,18 +13,11 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff2E4053),
-      body: SafeArea(
-        child: Column(
-          children: [
-            IconButton(
-              icon: const Icon(Icons.power_settings_new),
-              onPressed: () {
-                context.read<AuthService>().signOut();
-              },
-            ),
-          ],
-        ),
+      appBar: AppBar(
+        backgroundColor: const Color(0xff2E4060),
       ),
+      drawer: const HomeDrawer(),
+      body: const HomeMain(),
     );
   }
 }
