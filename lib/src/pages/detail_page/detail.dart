@@ -59,7 +59,7 @@ class Detail extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
+                      if (_document['fields']['tranche'] != null) Row(
                         children: [
                           Icon(
                             Icons.accessibility_new,
@@ -70,130 +70,139 @@ class Detail extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 5),
                           ),
                           Text(
-                            'tranche": "16-99"',
-                            style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                      ),
-                      Row(
-                        children: [
-                          Icon(Icons.location_on, size: 30, color: Colors.blue[900]),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 5),
-                          ),
-                          Flexible(
-                            child: Text(
-                              'adresse Rue Henri de Boissieu 01000 Bourg-en-Bresse',
-                              style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-                              overflow: TextOverflow.clip,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                      ),
-                      Row(
-                        children: [
-                          Icon(Icons.calendar_today, size: 30, color: Colors.blue[900]),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 5),
-                          ),
-                          Flexible(
-                            child: Text(
-                              'samedi 5 octobre - 14h00 \u00e0 18h00\r\ndimanche 6 octobre - 14h00 \u00e0 18h00',
-                              style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-                              overflow: TextOverflow.clip,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                      ),
-                      Row(
-                        children: [
-                          Icon(Icons.phone, size: 30, color: Colors.blue[900]),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 5),
-                          ),
-                          Flexible(
-                            child: Text(
-                              'telephone_du_lieu  04 74 45 52 17',
-                              style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-                              overflow: TextOverflow.clip,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                      ),
-                      Row(
-                        children: [
-                          Icon(Icons.language, size: 30, color: Colors.blue[900]),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 5),
-                          ),
-                          FlatButton(
-                            child: Text(
-                              'http://www.altecsciences.fr',
-                              style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-                              overflow: TextOverflow.clip,
-                            ),
-                            onPressed: () {
-                              _launchURL('http://www.altecsciences.fr');
-                            },
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'Noter : ',
-                            style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
-                          ),
-                          RatingBar.builder(
-                            initialRating: 0,
-                            minRating: 1,
-                            direction: Axis.horizontal,
-                            allowHalfRating: true,
-                            itemCount: 5,
-                            itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
-                            itemBuilder: (context, _) => Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                              size: 18,
-                            ),
-                            onRatingUpdate: (rating) {
-                              print(rating);
-                            },
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                          ),
-                          Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Text('4.5'),
-                                  Icon(
-                                    Icons.star,
-                                    size: 15,
-                                  )
-                                ],
-                              ),
-                              Text('145 avis')
-                            ],
+                              _document['fields']['tranche'].toString() + ' ans',
+                              style:  TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
                           )
                         ],
                       ),
+                      if (_document['fields']['adresse'] != null) Column(
+                        children: [ Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                        ),
+                          Row(
+                            children: [
+                              Icon(Icons.location_on, size: 30, color: Colors.blue[900]),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 5),
+                              ),
+                              Flexible(
+                                  child:  Text(
+                                    _document['fields']['adresse'].toString(),
+                                    style:  TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
+                                  )
+                              ),
+                            ],
+                          ),
+                        ]
+                      ),
+                      if (_document['fields']['horaires_detailles_fr'] != null) Column(
+                        children: [ Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                          ),
+                          Row(
+                            children: [
+                              Icon(Icons.calendar_today, size: 30, color: Colors.blue[900]),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 5),
+                              ),
+                              Flexible(
+                                  child:  Text(
+                                    _document['fields']['horaires_detailles_fr'].toString(),
+                                    style:  TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
+                                  )
+                              ),
+                            ],
+                          ),
+                        ]
+                      ),
+                      if (_document['fields']['telephone_du_lieu'] != null) Column(
+                        children: [Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                        ),
+                          Row(
+                            children: [
+                              Icon(Icons.phone, size: 30, color: Colors.blue[900]),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 5),
+                              ),
+                              Flexible(
+                                  child:  Text(
+                                    _document['fields']['telephone_du_lieu'].toString(),
+                                    style:  TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
+                                  )
+                              ),
+                            ],
+                          ),
+                      ]),
+                      if (_document['fields']['site_web_du_lieu'] != null) Column(
+                        children: [Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                        ),
+                          Row(
+                            children: [
+                              Icon(Icons.language, size: 30, color: Colors.blue[900]),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 5),
+                              ),
+                              GestureDetector(
+                                child: Text(
+                                  _document['fields']['site_web_du_lieu'].toString(),
+                                  style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                                  overflow: TextOverflow.clip,
+                                ),
+                                onTap: () {
+                                  _launchURL('http://www.altecsciences.fr');
+                                },
+                              ),
+                            ],
+                          ),
+                      ]),
+                      if (_document['fields']['horaires_detailles_fr'] != null)Column(
+                        children: [Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                        ),
+                          Row(
+                            children: [
+                              Text(
+                                'Noter : ',
+                                style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                              ),
+                              RatingBar.builder(
+                                initialRating: 0,
+                                minRating: 1,
+                                direction: Axis.horizontal,
+                                allowHalfRating: true,
+                                itemCount: 5,
+                                itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
+                                itemBuilder: (context, _) => Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                  size: 18,
+                                ),
+                                onRatingUpdate: (rating) {
+                                  print(rating);
+                                },
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10.0),
+                              ),
+                              Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text('4.5'),
+                                      Icon(
+                                        Icons.star,
+                                        size: 15,
+                                      )
+                                    ],
+                                  ),
+                                  Text('145 avis')
+                                ],
+                              )
+                            ],
+                          ),
+                      ]),
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
                       ),
@@ -213,133 +222,116 @@ class Detail extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                      ),
-                      Text.rich(TextSpan(text: 'Thématiques : ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16), children: [
-                        TextSpan(
-                          text: 'Sciences de la vie et de la sant\u00e9|Sciences num\u00e9riques|Sciences humaines et sociales.',
-                          style: TextStyle(fontWeight: FontWeight.normal, fontSize: 16),
-                        )
-                      ])),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                      ),
-                      Text.rich(TextSpan(
-                          text: 'Orientation et axes transversaux : ',
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                          children: [
+                      if (_document['fields']['thematiques'] != null) Column(
+                        children: [Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                        ),
+                          Text.rich(TextSpan(text: 'Thématiques : ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[600]), children: [
                             TextSpan(
-                              text:
-                                  'Orientation nationale, Enjeux de société, débat & controverses, Culture technique, industrielle et innovation, Projets de médiation innovante ',
-                              style: TextStyle(fontWeight: FontWeight.normal, fontSize: 16),
+                              text: _document['fields']['thematiques'].toString(),
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
                             )
                           ])),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                      ),
-                      Text.rich(TextSpan(text: 'Publics concernés : ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16), children: [
-                        TextSpan(
-                          text: 'Collège (11 - 15 ans), Lycée (15 - 18 ans), Etudiants (18 - 25 ans',
-                          style: TextStyle(fontWeight: FontWeight.normal, fontSize: 16),
-                        )
-                      ])),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                      ),
-                      Text.rich(
-                          TextSpan(text: 'Inscription nécessaire ? : ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16), children: [
-                        TextSpan(
-                          text: 'Non',
-                          style: TextStyle(fontWeight: FontWeight.normal, fontSize: 16),
-                        )
-                      ])),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                      ),
-                      Text.rich(TextSpan(text: 'description_fr : ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16), children: [
-                        TextSpan(
-                          text:
-                              ' Les \u00e9quipes du centre hospitalier vous pr\u00e9sentent les innovations m\u00e9dicales utilis\u00e9es \u00e0 Bourg : l\'eye-tracking, l\'enseignement des soins d\'urgence gr\u00e2ce aux mannequins derni\u00e8re g\u00e9n\u00e9ration, etc.',
-                          style: TextStyle(fontWeight: FontWeight.normal, fontSize: 16),
-                        )
-                      ])),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                      ),
-                      Text.rich(TextSpan(
-                          text: 'Organisateur : ',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                          children: [
+                      ]),
+                      if (_document['fields']['orientation_et_axes_transversaux'] != null) Column(
+                        children: [Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                        ),
+                          Text.rich(TextSpan(text: 'Orientations et axes transversaux : ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[600]), children: [
                             TextSpan(
-                              text: 'Centre hospitalier Fleyriat de Bourg-en-Bresse',
-                              style: TextStyle(fontWeight: FontWeight.normal, fontSize: 16),
+                              text: _document['fields']['orientation_et_axes_transversaux'].toString(),
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
                             )
                           ])),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                      ),
-                      Text.rich(TextSpan(
-                          text: 'nom_du_lieu  ? : ',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                          children: [
+                      ]),
+                      if (_document['fields']['publics_concernes'] != null) Column(
+                        children: [Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                        ),
+                          Text.rich(TextSpan(text: 'Publics concernés : ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[600]), children: [
                             TextSpan(
-                              text: 'Village des Sciences de Bourg-en-Bresse',
-                              style: TextStyle(fontWeight: FontWeight.normal, fontSize: 16),
+                              text: _document['fields']['publics_concernes'].toString(),
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
                             )
                           ])),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                      ),
-                      Text.rich(TextSpan(
-                          text: 'tags_du_lieu  : ',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                          children: [
+                      ]),
+                      if (_document['fields']['inscription_necessaire'] != null) Column(
+                        children: [Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                        ),
+                          Text.rich(TextSpan(text: 'Inscription nécessaire : ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[600]), children: [
                             TextSpan(
-                              text: 'Lieu multi \u00e9v\u00e9nements',
-                              style: TextStyle(fontWeight: FontWeight.normal, fontSize: 16),
+                              text: _document['fields']['inscription_necessaire'].toString(),
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
                             )
                           ])),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                      ),
-                      Text.rich(TextSpan(
-                          text: 'description_du_lieu_fr : ',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                          children: [
+                      ]),
+                      if (_document['fields']['description_fr'] != null) Column(
+                        children: [Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                        ),
+                          Text.rich(TextSpan(text: 'Description évènement : ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[600]), children: [
                             TextSpan(
-                              text:
-                                  'Plus d\'une trentaine de stands d\'animation scientifique, un programme riche de conf\u00e9rences et de projections, la visite du Technopole Alimentec... D\u00e9couvrez la programmation tr\u00e8s riche de cette nouvelle \u00e9dition du village des sciences de Bourg-en-Bresse !\n\nPROGRAMME :\nVendredi 4 octobre de 18h \u00e0 21h : inauguration d\u00e9partementale et conf\u00e9rence sur l\'innovation m\u00e9dicale avec le Centre Hospitalier de Bourg-en-Bresse\nSamedi 5 octobre (14h \u00e0 18h) et dimanche 6 octobre (10h \u00e0 18h) : stands, conf\u00e9rences, projections, visite...\n\nINFOS PRATIQUES :\nBuvette \u00e9quitable avec Artisans du Monde le samedi et dimanche\nNOUVEAU : Restauration rapide et locale avec le Foodtruck fermier le dimanche midi !',
-                              style: TextStyle(fontWeight: FontWeight.normal, fontSize: 16),
+                              text: _document['fields']['description_fr'].toString(),
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
                             )
                           ])),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                      ),
-                      Text.rich(TextSpan(
-                          text: 'acces_itineraire_fr? : ',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                          children: [
+                      ]),
+                      if (_document['fields']['organisateur'] != null) Column(
+                        children: [Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                        ),
+                          Text.rich(TextSpan(text: 'Organisateur : ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[600]), children: [
                             TextSpan(
-                              text: 'GRATUIT et accessible \u00e0 tous',
-                              style: TextStyle(fontWeight: FontWeight.normal, fontSize: 16),
+                              text: _document['fields']['organisateur'].toString(),
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
                             )
                           ])),
+                      ]),
+                      if (_document['fields']['nom_du_lieu'] != null) Column(
+                        children: [Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                        ),
+                          Text.rich(TextSpan(text: 'Nom du lieu : ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[600]), children: [
+                            TextSpan(
+                              text: _document['fields']['nom_du_lieu'].toString(),
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
+                            )
+                          ])),
+                      ]),
+                      if (_document['fields']['tags_du_lieu'] != null) Column(
+                        children: [Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                        ),
+                          Text.rich(TextSpan(text: 'Tags : ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[600]), children: [
+                            TextSpan(
+                              text: _document['fields']['tags_du_lieu'].toString(),
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
+                            )
+                          ])),
+                      ]),
+                      if (_document['fields']['description_du_lieu_fr'] != null) Column(
+                        children: [Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                        ),
+                          Text.rich(TextSpan(text: 'Description du lieu : ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[600]), children: [
+                            TextSpan(
+                              text: _document['fields']['description_du_lieu_fr'].toString(),
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
+                            )
+                          ]))
+                      ]),
+                      if (_document['fields']['acces_itineraire_fr'] != null) Column(
+                        children: [Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                        ),
+                          Text.rich(TextSpan(text: 'Accès : ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[600]), children: [
+                            TextSpan(
+                              text: _document['fields']['acces_itineraire_fr'].toString(),
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
+                            )
+                          ])),
+                      ]),
                       Padding(
                         padding: const EdgeInsets.only(top: 5),
                       ),
@@ -348,11 +340,10 @@ class Detail extends StatelessWidget {
                 ],
               ),
             ),
-            FlatButton(
-              child: Image.network('https://cibul.s3.amazonaws.com/location99812301.jpg'),
-              onPressed: () {
-                _launchURL('http://www.altecsciences.fr');
-              },
+            CachedNetworkImage(
+              imageUrl: _document['fields']['image_du_lieu'].toString(),
+              progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
             Text(
               'Syndicat Mixte du Technop\u00f4le Alimentec',
