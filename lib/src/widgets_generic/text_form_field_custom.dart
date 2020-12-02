@@ -7,17 +7,20 @@ class TextFormFieldCustom extends StatelessWidget {
     @required TextInputType textInputType,
     @required String hintText,
     @required bool obscureText,
+    String Function(String) validator,
     Key key,
   })  : _controller = controller,
         _textInputType = textInputType,
         _hintText = hintText,
         _obscureText = obscureText,
+        _validator = validator,
         super(key: key);
 
   final TextEditingController _controller;
   final TextInputType _textInputType;
   final String _hintText;
   final bool _obscureText;
+  final String Function(String) _validator;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +37,17 @@ class TextFormFieldCustom extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: _hintText,
               ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Valeur manquante.';
+                }
+
+                if (_validator != null) {
+                  return _validator(value);
+                }
+
+                return null;
+              },
             ),
           ),
         ),

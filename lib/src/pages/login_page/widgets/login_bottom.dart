@@ -20,10 +20,12 @@ class LoginBottom extends StatelessWidget {
         children: [
           RaisedButton.icon(
             onPressed: () {
-              context.read<AuthService>().signIn(
-                    email: context.read<LoginInputControllerModel>().emailController.text.trim(),
-                    password: context.read<LoginInputControllerModel>().passwordController.text.trim(),
-                  );
+              if (context.read<GlobalKey<FormState>>().currentState.validate()) {
+                context.read<AuthService>().signIn(
+                      email: context.read<LoginInputControllerModel>().emailController.text.trim(),
+                      password: context.read<LoginInputControllerModel>().passwordController.text.trim(),
+                    );
+              }
             },
             icon: const Icon(Icons.arrow_forward_rounded),
             label: const Text('Connexion'),

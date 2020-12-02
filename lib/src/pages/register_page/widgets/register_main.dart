@@ -22,8 +22,11 @@ class RegisterMain extends StatelessWidget {
           currentFocus.unfocus();
         }
       },
-      child: Provider(
-        create: (_) => RegisterInputControllerModel(),
+      child: MultiProvider(
+        providers: [
+          Provider<GlobalKey<FormState>>(create: (_) => GlobalKey<FormState>()),
+          Provider<RegisterInputControllerModel>(create: (_) => RegisterInputControllerModel()),
+        ],
         child: Column(
           children: const [RegisterBody(), RegisterBottom()],
         ),
