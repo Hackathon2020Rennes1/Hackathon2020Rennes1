@@ -4,18 +4,17 @@ import 'dart:collection';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-//import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:latlong/latlong.dart' as lt;
 import 'package:flutter_map/src/layer/marker_layer.dart' as ml;
 
 
 class flutterMapEvent extends StatelessWidget{
 
-  flutterMapEvent(
+  flutterMapEvent({
       @required this.eventName,
       @required this.description,
       @required this.latitude,
-      @required this.longitude){}
+      @required this.longitude}){}
 
   final String eventName, description;
   final double latitude, longitude;
