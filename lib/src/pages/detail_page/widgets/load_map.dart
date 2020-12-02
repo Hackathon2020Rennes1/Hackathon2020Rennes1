@@ -14,16 +14,18 @@ class MapFromDocumentSnapshot extends StatelessWidget {
   Widget build(BuildContext context) {
 
     Map<String, dynamic> data = documentSnapshot.data();
+    print("MapFromDocumentSnapshot event data : "+data.toString());
     //data['geometry'];
     dynamic point = documentSnapshot.get(FieldPath(['geometry', 'coordinates']));
-    print("LoadMapFromDataBase events['geometry', 'coordinates'] = "+point.toString());
+    print("MapFromDocumentSnapshot events['geometry', 'coordinates'] = "+point.toString());
 
-    String eventName = data['titre_fr'].toString();
-    String description = data['description_fr'].toString();
+    String eventName = documentSnapshot.get(FieldPath(['fields', 'titre_fr'])).toString();
+    //String eventName = documentSnapshot.get(FieldPath(['fields', 'nom_du_lieu'])).toString();
+    String description = documentSnapshot.get(FieldPath(['fields', 'description_fr'])).toString();
     double latitude = double.parse(point[0].toString());
     double longitude = double.parse(point[1].toString());
 
-    print("LoadMapFromDataBase events eventName =["+eventName+"] description = ["+description+"] latitude=["+latitude.toString()+"] longitude=["+longitude.toString()+"]");
+    print("MapFromDocumentSnapshot events eventName =["+eventName+"] description = ["+description+"] latitude=["+latitude.toString()+"] longitude=["+longitude.toString()+"]");
 
     return MapEvent(
         eventName: eventName,
@@ -80,3 +82,36 @@ class MapFromDocumentSnapshot extends StatelessWidget {
 
   }
 }*/
+
+// exemple d'utilisation :
+// CreateFromDocumentSnapshot(eventId,(infosEvent)=>MapFromDocumentSnapshot(infosEvent))
+class CreateFromDocumentSnapshot extends StatelessWidget {
+
+  CreateFromDocumentSnapshot(this.id,this.create);
+
+  final String id;
+  final Widget Function(DocumentSnapshot) create;
+
+  @override
+  Widget build(BuildContext context) {
+    CollectionReference events = FirebaseFirestore.instance.collection('events');
+
+    return FutureBuilder<DocumentSnapshot>(
+        future: events.doc(id).get(),
+        builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot){
+
+          if (snapshot.hasError) {
+            return Text("Something went wrong, DocumentSnapshot");
+          }
+
+          if (snapshot.connectionState == ConnectionState.done) {
+            print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            return create(snapshot.data);
+          }
+
+          return Text("loading");
+        }
+    );
+
+  }
+}
