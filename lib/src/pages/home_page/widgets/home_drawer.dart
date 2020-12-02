@@ -27,6 +27,7 @@ class HomeDrawer extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
+                margin: const EdgeInsets.all(0),
                 decoration: const BoxDecoration(
                   color: Color(0xff2E4060),
                 ),
@@ -34,7 +35,7 @@ class HomeDrawer extends StatelessWidget {
                     _firebaseUser.displayName != null ? Text(_firebaseUser.displayName, style: const TextStyle(fontSize: 22)) : const Text(''),
                 accountEmail: _firebaseUser.email != null ? Text(_firebaseUser.email) : const Text(''),
                 currentAccountPicture: CachedNetworkImage(
-                  imageUrl: _firebaseUser.photoURL,
+                  imageUrl:  _firebaseUser.photoURL ?? 'empty',
                   progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
                   imageBuilder: (context, imageProvider) => Container(
                     decoration: BoxDecoration(
@@ -59,6 +60,20 @@ class HomeDrawer extends StatelessWidget {
                   )
                 ],
               ),
+              RaisedButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.directions_walk),
+                label: const Text('Liste des parcours publiques', style: TextStyle(fontSize: 17)),
+                padding: const EdgeInsets.only(top: 15, bottom: 15),
+                shape: const RoundedRectangleBorder(),
+              ),
+              RaisedButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.directions_run),
+                label: const Text('Mes parcours', style: TextStyle(fontSize: 17), textAlign: TextAlign.start,),
+                padding: const EdgeInsets.only(top: 15, bottom: 15),
+                shape: const RoundedRectangleBorder(),
+              )
             ],
           ),
         ),
