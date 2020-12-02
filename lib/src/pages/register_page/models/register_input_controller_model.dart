@@ -7,8 +7,7 @@ class RegisterInputControllerModel {
   final TextEditingController pseudoController = TextEditingController();
   final TextEditingController photoUrlController = TextEditingController();
 
-  void dispose()
-  {
+  void dispose() {
     emailController.dispose();
     passwordController.dispose();
     pseudoController.dispose();

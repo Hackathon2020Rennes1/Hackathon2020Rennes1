@@ -39,9 +39,9 @@ class flutterMapEvent extends StatelessWidget{
               height: 80.0,
               point: lt.LatLng(latitude, longitude),
               builder: (ctx) =>
-              Container(
-                child: Text(eventName),
-              ),
+                  Container(
+                    child: Text(eventName),
+                  ),
             ),
           ],
         ),

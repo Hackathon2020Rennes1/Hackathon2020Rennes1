@@ -5,19 +5,17 @@ import 'package:flutter/material.dart';
 
 // parse documentSnapshot data and pass it to MapEvent
 class MapFromDocumentSnapshot extends StatelessWidget {
-
   MapFromDocumentSnapshot(this.documentSnapshot);
 
   final DocumentSnapshot documentSnapshot;
 
   @override
   Widget build(BuildContext context) {
-
     Map<String, dynamic> data = documentSnapshot.data();
-    print("MapFromDocumentSnapshot event data : "+data.toString());
+    print("MapFromDocumentSnapshot event data : " + data.toString());
     //data['geometry'];
     dynamic point = documentSnapshot.get(FieldPath(['geometry', 'coordinates']));
-    print("MapFromDocumentSnapshot events['geometry', 'coordinates'] = "+point.toString());
+    print("MapFromDocumentSnapshot events['geometry', 'coordinates'] = " + point.toString());
 
     String eventName = documentSnapshot.get(FieldPath(['fields', 'titre_fr'])).toString();
     //String eventName = documentSnapshot.get(FieldPath(['fields', 'nom_du_lieu'])).toString();
@@ -25,14 +23,17 @@ class MapFromDocumentSnapshot extends StatelessWidget {
     double latitude = double.parse(point[0].toString());
     double longitude = double.parse(point[1].toString());
 
-    print("MapFromDocumentSnapshot events eventName =["+eventName+"] description = ["+description+"] latitude=["+latitude.toString()+"] longitude=["+longitude.toString()+"]");
+    print("MapFromDocumentSnapshot events eventName =[" +
+        eventName +
+        "] description = [" +
+        description +
+        "] latitude=[" +
+        latitude.toString() +
+        "] longitude=[" +
+        longitude.toString() +
+        "]");
 
-    return MapEvent(
-        eventName: eventName,
-        description: description,
-        latitude: latitude,
-        longitude: longitude);
-
+    return MapEvent(eventName: eventName, description: description, latitude: latitude, longitude: longitude);
   }
 }
 
@@ -86,8 +87,7 @@ class MapFromDocumentSnapshot extends StatelessWidget {
 // exemple d'utilisation :
 // CreateFromDocumentSnapshot(eventId,(infosEvent)=>MapFromDocumentSnapshot(infosEvent))
 class CreateFromDocumentSnapshot extends StatelessWidget {
-
-  CreateFromDocumentSnapshot(this.id,this.create);
+  CreateFromDocumentSnapshot(this.id, this.create);
 
   final String id;
   final Widget Function(DocumentSnapshot) create;
@@ -98,8 +98,7 @@ class CreateFromDocumentSnapshot extends StatelessWidget {
 
     return FutureBuilder<DocumentSnapshot>(
         future: events.doc(id).get(),
-        builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot){
-
+        builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text("Something went wrong, DocumentSnapshot");
           }
@@ -109,8 +108,6 @@ class CreateFromDocumentSnapshot extends StatelessWidget {
           }
 
           return Text("loading");
-        }
-    );
-
+        });
   }
 }
