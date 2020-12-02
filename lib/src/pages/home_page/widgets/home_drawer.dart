@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../services/firebase_services/auth_service.dart';
+import '../../detail_page/detail_page.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({
@@ -70,7 +71,16 @@ class HomeDrawer extends StatelessWidget {
               RaisedButton.icon(
                 onPressed: () {},
                 icon: const Icon(Icons.directions_run),
-                label: const Text('Mes parcours', style: TextStyle(fontSize: 17), textAlign: TextAlign.start,),
+                label: const Text('Mes parcours', style: TextStyle(fontSize: 17)),
+                padding: const EdgeInsets.only(top: 15, bottom: 15),
+                shape: const RoundedRectangleBorder(),
+              ),
+              RaisedButton.icon(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute<void>(builder: (context) => DetailPage(eventId: 'b217feb0-33bb-11eb-9251-aff80825ebfe')));
+                },
+                icon: const Icon(Icons.place_outlined),
+                label: const Text('Carte interactive', style: TextStyle(fontSize: 17)),
                 padding: const EdgeInsets.only(top: 15, bottom: 15),
                 shape: const RoundedRectangleBorder(),
               )

@@ -21,6 +21,10 @@ class DetailPage extends StatelessWidget {
     //DetailPage(eventId : 'b217feb0-33bb-11eb-9251-aff80825ebfe')
     return Scaffold(
       backgroundColor: const Color(0xff2E4053),
+      appBar: AppBar(
+        backgroundColor: const Color(0xff2E4060),
+        title: const Text('Carte interactive'),
+      ),
       body: SafeArea(
         child: Container(
             child: Row(children: [
