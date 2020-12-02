@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fete_ta_science/src/pages/detail_page/widgets/event_google_map.dart';
+import 'package:fete_ta_science/src/pages/detail_page/widgets/google_map_for_an_event.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +7,7 @@ import 'flutter_map_for_an_event.dart';
 
 // parse documentSnapshot data and pass it to MapEvent
 class MapFromDocumentSnapshot extends StatelessWidget {
+
   MapFromDocumentSnapshot(this.documentSnapshot);
 
   final DocumentSnapshot documentSnapshot;
@@ -22,8 +23,8 @@ class MapFromDocumentSnapshot extends StatelessWidget {
     String eventName = documentSnapshot.get(FieldPath(['fields', 'titre_fr'])).toString();
     //String eventName = documentSnapshot.get(FieldPath(['fields', 'nom_du_lieu'])).toString();
     String description = documentSnapshot.get(FieldPath(['fields', 'description_fr'])).toString();
-    double latitude = double.parse(point[0].toString());
-    double longitude = double.parse(point[1].toString());
+    double latitude = double.parse(point[1].toString());
+    double longitude = double.parse(point[0].toString());
 
     print("MapFromDocumentSnapshot events eventName =[" +
         eventName +
@@ -58,7 +59,7 @@ class CreateFromDocumentSnapshot extends StatelessWidget {
         future: events.doc(id).get(),
         builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.hasError) {
-            return Text("Something went wrong, DocumentSnapshot");
+            return Text("Something went wrong, no DocumentSnapshot received from data-base");
           }
 
           if (snapshot.connectionState == ConnectionState.done) {
