@@ -150,7 +150,7 @@ class Detail extends StatelessWidget {
                           padding: const EdgeInsets.only(top: 5),
                         ),
                         RatingBar.builder(
-                          initialRating: 3,
+                          initialRating: 0,
                           minRating: 1,
                           direction: Axis.horizontal,
                           allowHalfRating: true,
@@ -320,7 +320,7 @@ class Detail extends StatelessWidget {
               ),
               FlatButton(
                 child: Image.network('https://cibul.s3.amazonaws.com/location99812301.jpg'),
-                onPressed: () {},
+                onPressed: () {_launchURL('http://www.altecsciences.fr');},
               ),
               Text(
                 'Syndicat Mixte du Technop\u00f4le Alimentec',
