@@ -4,8 +4,10 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class MapEvent extends StatefulWidget {
-  MapEvent({
+// google maps necessite de payer pour avoir un compte G suite (ou gratuit si on utilise des comptes google pour les utilisateurs)
+
+class GoogleMapForEvent extends StatefulWidget {
+  GoogleMapForEvent({
     @required this.eventName,
     @required this.description,
     @required this.latitude,
@@ -17,10 +19,10 @@ class MapEvent extends StatefulWidget {
   final double latitude, longitude;
 
   @override
-  State<MapEvent> createState() => MapEventState();
+  State<GoogleMapForEvent> createState() => GoogleMapForEventState();
 }
 
-class MapEventState extends State<MapEvent> {
+class GoogleMapForEventState extends State<GoogleMapForEvent> {
   //GoogleMapController _googleMapController;
   Completer<GoogleMapController> _googleMapController = Completer();
 
@@ -42,14 +44,14 @@ class MapEventState extends State<MapEvent> {
 
   @override
   Widget build(BuildContext context) {
-    /*return GoogleMap(
+    return GoogleMap(
       initialCameraPosition: CameraPosition(
         target: LatLng(widget.latitude, widget.longitude),
         zoom: 14,
       ),
       onMapCreated: _onMapCreated,
       markers: _markers,
-    );*/
+    );
 
     /*return Scaffold(
         body: GoogleMap(
@@ -62,18 +64,18 @@ class MapEventState extends State<MapEvent> {
         )
     );*/
 
-    return Scaffold(
+    /*return Scaffold(
         body: Row(children: [
       Expanded(child: Text("TEST")),
       Expanded(
           child: GoogleMap(
         initialCameraPosition: CameraPosition(
-          target: LatLng(50, 50),
+          target: LatLng(widget.latitude, widget.longitude),
           zoom: 14,
         ),
         onMapCreated: _onMapCreated,
         markers: _markers,
       ))
-    ]));
+    ]));*/
   }
 }

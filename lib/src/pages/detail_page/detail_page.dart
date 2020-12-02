@@ -25,9 +25,7 @@ class DetailPage extends StatelessWidget {
       body: SafeArea(
         child: Container(
             child: Row(children: [
-          //MapFromDocumentSnapshot(infosEvent)
-          //Expanded(child: CreateFromDocumentSnapshot(eventId, (infosEvent) => MapFromDocumentSnapshot(infosEvent))),
-          Expanded(child: MapWidget(eventId)),
+              Expanded(child: MapWidget(eventId:eventId)),
         ])),
       ),
     );

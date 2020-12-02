@@ -16,9 +16,9 @@ class MapFromDocumentSnapshot extends StatelessWidget {
   Widget build(BuildContext context) {
     Map<String, dynamic> data = documentSnapshot.data();
     print("MapFromDocumentSnapshot event data : " + data.toString());
-    //data['geometry'];
+
     dynamic point = documentSnapshot.get(FieldPath(['geometry', 'coordinates']));
-    print("MapFromDocumentSnapshot events['geometry', 'coordinates'] = " + point.toString());
+    //print("MapFromDocumentSnapshot events['geometry', 'coordinates'] = " + point.toString());
 
     String eventName = documentSnapshot.get(FieldPath(['fields', 'titre_fr'])).toString();
     //String eventName = documentSnapshot.get(FieldPath(['fields', 'nom_du_lieu'])).toString();
@@ -26,7 +26,7 @@ class MapFromDocumentSnapshot extends StatelessWidget {
     double latitude = double.parse(point[1].toString());
     double longitude = double.parse(point[0].toString());
 
-    print("MapFromDocumentSnapshot events eventName =[" +
+    /*print("MapFromDocumentSnapshot events eventName =[" +
         eventName +
         "] description = [" +
         description +
@@ -34,10 +34,10 @@ class MapFromDocumentSnapshot extends StatelessWidget {
         latitude.toString() +
         "] longitude=[" +
         longitude.toString() +
-        "]");
+        "]");*/
 
     // version google map
-    //return MapEvent(eventName: eventName, description: description, latitude: latitude, longitude: longitude);
+    //return GoogleMapForEvent(eventName: eventName, description: description, latitude: latitude, longitude: longitude);
 
     return flutterMapEvent(eventName: eventName, description: description, latitude: latitude, longitude: longitude);
   }

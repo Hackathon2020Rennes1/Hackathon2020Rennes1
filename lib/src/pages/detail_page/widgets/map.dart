@@ -8,7 +8,7 @@ import 'flutter_map_for_an_event.dart';
 
 class MapWidget extends StatelessWidget {
 
-  MapWidget(this.eventId);
+  MapWidget({@required this.eventId, Key key}): super(key: key);
 
   final String eventId;
 
