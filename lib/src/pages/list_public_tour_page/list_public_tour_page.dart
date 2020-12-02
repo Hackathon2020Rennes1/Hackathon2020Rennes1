@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class PublicTourPage extends StatelessWidget {
-  const PublicTourPage({
+class ListPublicTourPage extends StatelessWidget {
+  const ListPublicTourPage({
     Key key,
   }) : super(key: key);
 

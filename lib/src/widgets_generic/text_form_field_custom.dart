@@ -8,12 +8,14 @@ class TextFormFieldCustom extends StatelessWidget {
     @required String hintText,
     @required bool obscureText,
     String Function(String) validator,
+    bool validatorEmptyCheck = true,
     Key key,
   })  : _controller = controller,
         _textInputType = textInputType,
         _hintText = hintText,
         _obscureText = obscureText,
         _validator = validator,
+        _validatorEmptyCheck = validatorEmptyCheck,
         super(key: key);
 
   final TextEditingController _controller;
@@ -21,6 +23,7 @@ class TextFormFieldCustom extends StatelessWidget {
   final String _hintText;
   final bool _obscureText;
   final String Function(String) _validator;
+  final bool _validatorEmptyCheck;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,7 @@ class TextFormFieldCustom extends StatelessWidget {
                 hintText: _hintText,
               ),
               validator: (value) {
-                if (value.isEmpty) {
+                if (_validatorEmptyCheck && value.isEmpty) {
                   return 'Valeur manquante.';
                 }
 
