@@ -2,11 +2,10 @@ import 'package:fete_ta_science/src/pages/tour_page/widgets/event_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class TourWidget extends StatelessWidget {
-
   TourWidget({
-    @required this.id, Key key,
+    @required this.id,
+    Key key,
   }) : super(key: key);
 
   String id;
@@ -21,18 +20,16 @@ class TourWidget extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-              child:EventListWidget(tourId:id),
+            child: EventListWidget(tourId: id),
           ),
           IconButton(
             icon: Icon(Icons.add_circle),
-            onPressed: (){
+            onPressed: () {
               // aller à une selection d'events pour l'ajouter à ce tour
-
             },
           )
         ],
       ),
-
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fete_ta_science/src/pages/detail_page/widgets/google_map_for_an_event.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +6,6 @@ import 'flutter_map_for_an_event.dart';
 
 // parse documentSnapshot data and pass it to MapEvent
 class MapFromDocumentSnapshot extends StatelessWidget {
-
   MapFromDocumentSnapshot(this.documentSnapshot);
 
   final DocumentSnapshot documentSnapshot;
@@ -58,7 +56,6 @@ class CreateFromDocumentSnapshot extends StatelessWidget {
     return FutureBuilder<DocumentSnapshot>(
         future: events.doc(id).get(),
         builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-
           if (snapshot.hasError) {
             return Text("Something went wrong, no DocumentSnapshot received from data-base");
           }

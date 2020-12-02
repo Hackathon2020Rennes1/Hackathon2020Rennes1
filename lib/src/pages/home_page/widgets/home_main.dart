@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeMain extends StatelessWidget {
   const HomeMain({
@@ -19,7 +20,22 @@ class HomeMain extends StatelessWidget {
         }
         return Scrollbar(
           child: ListView(
-            children: snapshot.data.docs.map((document) {
+            children: snapshot.data.docs
+                .where((element) =>
+                    element['fields']['lieu'].toString().toLowerCase().contains(context.watch<TextEditingController>().text.trim().toLowerCase()) ||
+                    element['fields']['thematiques']
+                        .toString()
+                        .toLowerCase()
+                        .contains(context.watch<TextEditingController>().text.trim().toLowerCase()) ||
+                    element['fields']['resume_dates_fr']
+                        .toString()
+                        .toLowerCase()
+                        .contains(context.watch<TextEditingController>().text.trim().toLowerCase()) ||
+                    element['fields']['mots_cles_fr']
+                        .toString()
+                        .toLowerCase()
+                        .contains(context.watch<TextEditingController>().text.trim().toLowerCase()))
+                .map((document) {
               return Card(
                 child: ListTile(
                   contentPadding: const EdgeInsets.only(left: 10, top: 5, bottom: 5),

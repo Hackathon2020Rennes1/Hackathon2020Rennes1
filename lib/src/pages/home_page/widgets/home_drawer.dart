@@ -30,12 +30,24 @@ class HomeDrawer extends StatelessWidget {
                 decoration: const BoxDecoration(
                   color: Color(0xff2E4060),
                 ),
-                accountName: Text(_firebaseUser.displayName, style: const TextStyle(fontSize: 22)),
-                accountEmail: Text(_firebaseUser.email),
+                accountName:
+                    _firebaseUser.displayName != null ? Text(_firebaseUser.displayName, style: const TextStyle(fontSize: 22)) : const Text(''),
+                accountEmail: _firebaseUser.email != null ? Text(_firebaseUser.email) : const Text(''),
                 currentAccountPicture: CachedNetworkImage(
-                  imageUrl: 'http://via.placeholder.com/350x150',
+                  imageUrl: _firebaseUser.photoURL,
                   progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  imageBuilder: (context, imageProvider) => Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => Container(
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(image: AssetImage('assets/images/profile/avatar-anonym.png'), fit: BoxFit.cover),
+                    ),
+                  ),
                 ),
                 otherAccountsPictures: [
                   IconButton(

@@ -9,16 +9,13 @@ class ListPublicTourPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     var events = List<EventData>();
 
     return Scaffold(
       backgroundColor: const Color(0xff2E4053),
       body: SafeArea(
         child: Container(
-          child: flutterMapEventsTour(
-              events : events
-          ),
+          child: flutterMapEventsTour(events: events),
         ),
       ),
     );

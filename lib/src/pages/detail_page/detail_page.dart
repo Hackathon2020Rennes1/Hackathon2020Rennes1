@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fete_ta_science/src/pages/detail_page/widgets/map_from_document_snapshot.dart';
 import 'package:fete_ta_science/src/pages/detail_page/widgets/map.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +24,7 @@ class DetailPage extends StatelessWidget {
       body: SafeArea(
         child: Container(
             child: Row(children: [
-              Expanded(child: MapWidget(eventId:eventId)),
+          Expanded(child: MapWidget(eventId: eventId)),
         ])),
       ),
     );
