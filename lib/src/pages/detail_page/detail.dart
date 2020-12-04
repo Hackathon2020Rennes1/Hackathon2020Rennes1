@@ -1,11 +1,13 @@
-import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'package:provider/provider.dart';
 
 class Detail extends StatelessWidget {
   const Detail({
@@ -26,6 +28,9 @@ class Detail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _firebaseUser = context.watch<User>();
+    final _ratingKey = GlobalKey<_RatingTextState>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Détail'),
@@ -70,7 +75,7 @@ class Detail extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 5),
                           ),
                           Text(
-                              _document['fields']['tranche'].toString() + ' ans',
+                              'De ${_document['fields']['tranche'].toString().split('-')[0]} à ${_document['fields']['tranche'].toString().split('-')[1]} ans',
                               style:  TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
                           )
                         ],
@@ -126,9 +131,19 @@ class Detail extends StatelessWidget {
                                 padding: const EdgeInsets.only(left: 5),
                               ),
                               Flexible(
-                                  child:  Text(
-                                    _document['fields']['telephone_du_lieu'].toString(),
-                                    style:  TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
+                                  child:  GestureDetector(
+                                    child: Text(
+                                      _document['fields']['telephone_du_lieu'].toString(),
+                                      style:  TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.blueGrey, decoration: TextDecoration.underline),
+                                    ),
+                                    onTap: () async {
+                                      final telScheme = 'tel:${_document['fields']['telephone_du_lieu']}';
+                                      if (await canLaunch(telScheme)) {
+                                      await launch(telScheme);
+                                      } else {
+                                      throw 'Could not launch $telScheme';
+                                      }
+                                    },
                                   )
                               ),
                             ],
@@ -147,7 +162,7 @@ class Detail extends StatelessWidget {
                               GestureDetector(
                                 child: Text(
                                   _document['fields']['site_web_du_lieu'].toString(),
-                                  style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                                  style:  TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.blueGrey, decoration: TextDecoration.underline),
                                   overflow: TextOverflow.clip,
                                 ),
                                 onTap: () {
@@ -168,7 +183,7 @@ class Detail extends StatelessWidget {
                                 style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
                               ),
                               RatingBar.builder(
-                                initialRating: 0,
+                                initialRating: (_document.data().containsKey('ratings') && _document['ratings'][_firebaseUser.uid] != null) ? double.parse(_document['ratings'][_firebaseUser.uid].toString()) : 0,
                                 minRating: 1,
                                 direction: Axis.horizontal,
                                 allowHalfRating: true,
@@ -179,27 +194,15 @@ class Detail extends StatelessWidget {
                                   color: Colors.amber,
                                   size: 18,
                                 ),
-                                onRatingUpdate: (rating) {
-                                  print(rating);
+                                onRatingUpdate: (rating) async {
+                                  await _document.reference.update({'ratings.${_firebaseUser.uid}' : rating});
+                                  _ratingKey.currentState.updateText();
                                 },
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 10.0),
                               ),
-                              Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text('4.5'),
-                                      Icon(
-                                        Icons.star,
-                                        size: 15,
-                                      )
-                                    ],
-                                  ),
-                                  Text('145 avis')
-                                ],
-                              )
+                              RatingText(key: _ratingKey,)
                             ],
                           ),
                       ]),
@@ -341,7 +344,7 @@ class Detail extends StatelessWidget {
               ),
             ),
             CachedNetworkImage(
-              imageUrl: _document['fields']['image_du_lieu'].toString(),
+              imageUrl: _document['fields']['image_du_lieu'].toString() ?? 'empty',
               progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
               errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
@@ -356,6 +359,55 @@ class Detail extends StatelessWidget {
     );
   }
 }
-/*
-        "image_source": "https://cibul.s3.amazonaws.com/4ddb4e5624d640a7b51e9857a8ccd7d3.full.image.jpg",
-* */
+
+class RatingText extends StatefulWidget {
+  const RatingText({
+    @required QueryDocumentSnapshot queryDocumentSnapshot,
+    Key key,
+  }) : document = queryDocumentSnapshot,
+        super(key: key);
+
+  final QueryDocumentSnapshot document;
+
+  @override
+  _RatingTextState createState() => _RatingTextState();
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<QueryDocumentSnapshot>('document', document));
+  }
+}
+
+class _RatingTextState extends State<RatingText> {
+  int _starNumber;
+
+  void updateText()
+  {
+    print("TESTESTEST");
+  }
+
+  @override
+  void initState() {
+
+    //this._starNumber = widget.document;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Text('4.5'),
+            Icon(
+              Icons.star,
+              size: 15,
+            )
+          ],
+        ),
+        Text('145 avis')
+      ],
+    );
+  }
+}

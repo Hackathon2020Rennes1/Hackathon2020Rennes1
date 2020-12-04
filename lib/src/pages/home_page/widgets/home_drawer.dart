@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../services/firebase_services/auth_service.dart';
-import '../../detail_page/detail_page.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({
