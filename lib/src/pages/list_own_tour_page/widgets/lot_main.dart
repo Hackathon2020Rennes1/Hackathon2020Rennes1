@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'home_body.dart';
-import 'home_search_bar.dart';
+import 'lot_body.dart';
+import 'lot_title_field.dart';
 
-class HomeMain extends StatelessWidget {
-  const HomeMain({
+class ListOwnTourMain extends StatelessWidget {
+  const ListOwnTourMain({
     Key key,
   }) : super(key: key);
 
@@ -13,8 +13,8 @@ class HomeMain extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: const [
-        HomeSearchBar(),
-        HomeBody(),
+        ListOwnTourTitleField(),
+        ListOwnTourBody(),
       ],
     );
   }

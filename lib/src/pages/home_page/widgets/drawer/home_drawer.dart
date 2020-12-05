@@ -1,13 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fete_ta_science/src/pages/list_own_tour_page/list_own_tour_page.dart';
-import 'package:fete_ta_science/src/pages/list_public_tour_page/list_public_tour_page.dart';
-import 'package:fete_ta_science/src/pages/map_of_all_events_page/map.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../services/firebase_services/auth_service.dart';
+import '../../../../services/firebase_services/auth_service.dart';
+import 'home_drawer_menu.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({
@@ -37,8 +35,8 @@ class HomeDrawer extends StatelessWidget {
                 accountName:
                     _firebaseUser.displayName != null ? Text(_firebaseUser.displayName, style: const TextStyle(fontSize: 22)) : const Text(''),
                 accountEmail: _firebaseUser.email != null ? Text(_firebaseUser.email) : const Text(''),
-                currentAccountPicture: CachedNetworkImage(
-                  imageUrl:  _firebaseUser.photoURL ?? 'empty',
+                currentAccountPicture: _firebaseUser.photoURL != null ? CachedNetworkImage(
+                  imageUrl: _firebaseUser.photoURL,
                   progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
                   imageBuilder: (context, imageProvider) => Container(
                     decoration: BoxDecoration(
@@ -52,6 +50,8 @@ class HomeDrawer extends StatelessWidget {
                       image: DecorationImage(image: AssetImage('assets/images/profile/avatar-anonym.png'), fit: BoxFit.cover),
                     ),
                   ),
+                ) : CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/profile/avatar-anonym.png'),
                 ),
                 otherAccountsPictures: [
                   IconButton(
@@ -63,40 +63,7 @@ class HomeDrawer extends StatelessWidget {
                   )
                 ],
               ),
-              RaisedButton.icon(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (contex)=>ListPublicTourPage())
-                  );
-                },
-                icon: const Icon(Icons.directions_walk),
-                label: const Text('Liste des parcours publiques', style: TextStyle(fontSize: 17)),
-                padding: const EdgeInsets.only(top: 15, bottom: 15),
-                shape: const RoundedRectangleBorder(),
-              ),
-              RaisedButton.icon(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (contex)=>ListOwnTourPage(userId:_firebaseUser.uid))
-                  );
-                },
-                icon: const Icon(Icons.directions_run),
-                label: const Text('Mes parcours', style: TextStyle(fontSize: 17)),
-                padding: const EdgeInsets.only(top: 15, bottom: 15),
-                shape: const RoundedRectangleBorder(),
-              ),
-              RaisedButton.icon(
-                onPressed: () {
-                  //Navigator.push(context, MaterialPageRoute<void>(builder: (context) => DetailPage(eventId: 'b217feb0-33bb-11eb-9251-aff80825ebfe')));
-                  Navigator.push(context, MaterialPageRoute<void>(builder: (context) => MapEvents()));
-                },
-                icon: const Icon(Icons.place_outlined),
-                label: const Text('Carte interactive', style: TextStyle(fontSize: 17)),
-                padding: const EdgeInsets.only(top: 15, bottom: 15),
-                shape: const RoundedRectangleBorder(),
-              )
+              const HomeDrawerMenu()
             ],
           ),
         ),
@@ -104,3 +71,4 @@ class HomeDrawer extends StatelessWidget {
     );
   }
 }
+
