@@ -90,7 +90,7 @@ class ListOwnTourBody extends StatelessWidget {
                                   context,
                                   MaterialPageRoute<Detail>(
                                       builder: (context) => Detail(
-                                            queryDocumentSnapshot: document,
+                                            id: document.id,
                                           )));
                             },
                             title: document['fields']['titre_fr'] != null ? Text(document['fields']['titre_fr'].toString()) : const Text(''),
