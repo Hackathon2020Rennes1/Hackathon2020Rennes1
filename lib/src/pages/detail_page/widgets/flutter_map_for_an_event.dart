@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/src/layer/marker_layer.dart' as ml;
 import 'package:latlong/latlong.dart' as lt;
+import 'package:flutter_map/src/layer/marker_layer.dart';
+
+import '../detail.dart';
 
 
 
@@ -72,18 +75,47 @@ class flutterMapEventState extends State<flutterMapEvent> {
     for(var e in widget.events){
       _markers.add(
           ml.Marker(
-            width: 12.0,
-            height: 12,
+            width: 500.0,
+            height: 60,
+            //onTap: () {},
             point: lt.LatLng(e.latitude, e.longitude),
+            anchorPos: AnchorPos.align(AnchorAlign.top),
             builder: (ctx) => Container(
-              width: 300.0,
-              height: 300.0,
-              decoration: BoxDecoration(
-                color: Colors.green,
-                shape: BoxShape.circle,
+              width: 300,
+                height: 300,
+                  child:GestureDetector(
+                    child:
+                    Column(
+                      children: [
+                        Expanded(
+                            child:Container(
+                            width:120 ,
+                            child:Text(e.name,overflow: TextOverflow.ellipsis,maxLines: 2,)
+                          )
+                        ),
+              Expanded(
+                child:Icon(
+                  Icons.location_on,
+                  color: Colors.deepOrange,
+                )
               ),
-            ),
-          )
+                      ],
+                    ),
+                    onTap: () {
+                      print("go to events details id="+e.id);
+                      Navigator.push<Detail>(
+                          context,
+                          MaterialPageRoute<Detail>(
+                              builder: (context) => Detail(
+                                id: e.id,
+                              )));
+                      // do something
+                    },
+                  )
+      )
+            )
+
+
       );
       /*
       ml.Marker(
