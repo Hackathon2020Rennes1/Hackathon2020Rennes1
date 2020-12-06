@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../detail_page/detail.dart';
+import '../../detail_page/detail_page.dart';
 
 class ListOwnTourBody extends StatelessWidget {
   const ListOwnTourBody({
@@ -27,7 +27,10 @@ class ListOwnTourBody extends StatelessWidget {
 
         var userEvents = <String>[];
 
-        if (userSnapshot != null && userSnapshot.data() != null && userSnapshot.data().containsKey('tour') && userSnapshot['tour']['events'] != null) {
+        if (userSnapshot != null &&
+            userSnapshot.data() != null &&
+            userSnapshot.data().containsKey('tour') &&
+            userSnapshot['tour']['events'] != null) {
           userEvents = List<String>.from(userSnapshot['tour']['events'] as List<dynamic>);
         }
 

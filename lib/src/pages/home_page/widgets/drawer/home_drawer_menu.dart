@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../list_own_tour_page/list_own_tour_page.dart';
 import '../../../list_public_tour_page/list_public_tour_page.dart';
-import '../../../map_of_all_events_page/map.dart';
+import '../../../carte_interactive_page/map_events.dart';
 
 class HomeDrawerMenu extends StatelessWidget {
   const HomeDrawerMenu({
