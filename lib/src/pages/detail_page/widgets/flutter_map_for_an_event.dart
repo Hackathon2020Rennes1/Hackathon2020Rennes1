@@ -93,12 +93,12 @@ class flutterMapEventState extends State<flutterMapEvent> {
                             child:Text(e.name,overflow: TextOverflow.ellipsis,maxLines: 2,)
                           )
                         ),
-              Expanded(
-                child:Icon(
-                  Icons.location_on,
-                  color: Colors.deepOrange,
-                )
-              ),
+                        Expanded(
+                          child:Icon(
+                            Icons.location_on,
+                            color: Colors.deepOrange,
+                          )
+                        ),
                       ],
                     ),
                     onTap: () {
@@ -112,21 +112,9 @@ class flutterMapEventState extends State<flutterMapEvent> {
                       // do something
                     },
                   )
-      )
             )
-
-
+          )
       );
-      /*
-      ml.Marker(
-              width: 120.0,
-              height: 90.0,
-              point: lt.LatLng(latitude, longitude),
-              builder: (ctx) =>
-              LocationLabel(eventName,description,90),
-                anchorPos: ml.AnchorPos.align(AnchorAlign.top)
-            ),
-       */
     }
   }
 
