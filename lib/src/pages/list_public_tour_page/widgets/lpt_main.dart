@@ -12,9 +12,8 @@ class ListPublicTourMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final _firebaseUser = context.watch<User>();
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('public_tour').snapshots(),
+      stream: FirebaseFirestore.instance.collection('public_tour').orderBy('date', descending: true).snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return const Center(
@@ -63,27 +62,6 @@ class ListPublicTourMain extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            /*
-                            // à voir plus tard pour implémenter un système d'avatar (ne pas oublier les import)
-                            CachedNetworkImage(
-                              imageUrl: _firebaseUser.photoURL ?? 'empty',
-                              height: 64,
-                              width: 64,
-                              progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
-                              imageBuilder: (context, imageProvider) => Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
-                                ),
-                              ),
-                              errorWidget: (context, url, error) => Container(
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(image: AssetImage('assets/images/profile/avatar-anonym.png'), fit: BoxFit.cover),
-                                ),
-                              ),
-                            ),
-                            */
                           ],
                         ),
                       ),
@@ -91,7 +69,12 @@ class ListPublicTourMain extends StatelessWidget {
                   ),
                   onTap: () {
                     Navigator.push<ListEventsFromTourPage>(
-                        context, MaterialPageRoute<ListEventsFromTourPage>(builder: (context) => ListEventsFromTourPage(events: events)));
+                        context,
+                        MaterialPageRoute<ListEventsFromTourPage>(
+                            builder: (context) => ListEventsFromTourPage(
+                                  events: events,
+                                  titre: document['titre_parcours'] != null ? document['titre_parcours'].toString() : 'Évènements liés au parcours',
+                                )));
                   },
                   trailing: const Icon(Icons.arrow_forward_rounded),
                 ),

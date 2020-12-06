@@ -6,11 +6,14 @@ import 'widgets/left_main.dart';
 
 class ListEventsFromTourPage extends StatelessWidget {
   const ListEventsFromTourPage({
+    @required String titre,
     @required List<String> events,
     Key key,
   })  : _events = events,
+        _titre = titre,
         super(key: key);
 
+  final String _titre;
   final List<String> _events;
 
   @override
@@ -19,7 +22,7 @@ class ListEventsFromTourPage extends StatelessWidget {
       backgroundColor: const Color(0xff2E4053),
       appBar: AppBar(
         backgroundColor: const Color(0xff2E4060),
-        title: const Text('Évènements liés au parcours'),
+        title: Text(_titre),
       ),
       body: SafeArea(
         child: Provider.value(value: _events, child: const ListEventsFromTourMain()),
