@@ -184,18 +184,20 @@ class Detail extends StatelessWidget {
                                         const Padding(
                                           padding: EdgeInsets.only(left: 5),
                                         ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            _launchURL(snapshot.data['fields']['site_web_du_lieu'].toString());
-                                          },
-                                          child: Text(
-                                            snapshot.data['fields']['site_web_du_lieu'].toString(),
-                                            style: const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.normal,
-                                                color: Colors.blueGrey,
-                                                decoration: TextDecoration.underline),
-                                            overflow: TextOverflow.ellipsis,
+                                        Flexible(
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              _launchURL(snapshot.data['fields']['site_web_du_lieu'].toString());
+                                            },
+                                            child: Text(
+                                              snapshot.data['fields']['site_web_du_lieu'].toString(),
+                                              style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: Colors.blueGrey,
+                                                  decoration: TextDecoration.underline),
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
                                           ),
                                         ),
                                       ],
