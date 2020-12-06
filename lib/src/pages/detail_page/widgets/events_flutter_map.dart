@@ -1,5 +1,5 @@
 
-import 'package:fete_ta_science/src/pages/detail_page/model/event.dart';
+import 'package:fete_ta_science/src/pages/carte_interactive_page/model/event.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -7,7 +7,7 @@ import 'package:flutter_map/src/layer/marker_layer.dart' as ml;
 import 'package:latlong/latlong.dart' as lt;
 import 'package:flutter_map/src/layer/marker_layer.dart';
 
-import '../detail.dart';
+import '../detail_page.dart';
 
 
 
