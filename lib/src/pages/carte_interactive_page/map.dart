@@ -1,6 +1,7 @@
-import 'package:fete_ta_science/src/pages/detail_page/widgets/map_from_document_snapshot.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'map_from_document_snapshot.dart';
 
 class MapWidget extends StatelessWidget {
   MapWidget({@required this.eventId, Key key}) : super(key: key);

@@ -27,7 +27,9 @@ class AuthService {
       final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
       await userCredential.user.updateProfile(displayName: pseudo, photoURL: photoUrl);
       await signIn(email: email, password: password);
-      await FirebaseFirestore.instance.collection('users').doc(userCredential.user.uid).set({'tour': {'events': []}});
+      await FirebaseFirestore.instance.collection('users').doc(userCredential.user.uid).set({
+        'tour': {'events': []}
+      });
 
       return 'Signed up';
     } on FirebaseAuthException catch (e) {

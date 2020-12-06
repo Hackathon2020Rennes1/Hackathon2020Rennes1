@@ -113,10 +113,9 @@ class Detail extends StatelessWidget {
                                         ),
                                         Flexible(
                                             child: Text(
-                                              snapshot.data['fields']['adresse'].toString(),
-                                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
-
-                                            )),
+                                          snapshot.data['fields']['adresse'].toString(),
+                                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
+                                        )),
                                       ],
                                     ),
                                   ]),
@@ -133,9 +132,9 @@ class Detail extends StatelessWidget {
                                         ),
                                         Flexible(
                                             child: Text(
-                                              snapshot.data['fields']['horaires_detailles_fr'].toString(),
-                                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
-                                            )),
+                                          snapshot.data['fields']['horaires_detailles_fr'].toString(),
+                                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
+                                        )),
                                       ],
                                     ),
                                   ]),
@@ -152,24 +151,24 @@ class Detail extends StatelessWidget {
                                         ),
                                         Flexible(
                                             child: GestureDetector(
-                                              onTap: () async {
-                                                final telScheme = 'tel:${snapshot.data['fields']['telephone_du_lieu']}';
-                                                if (await canLaunch(telScheme)) {
-                                                  await launch(telScheme);
-                                                } else {
-                                                  final Error error = ArgumentError('Could not launch $telScheme');
-                                                  throw error;
-                                                }
-                                              },
-                                              child: Text(
-                                                snapshot.data['fields']['telephone_du_lieu'].toString(),
-                                                style: const TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.normal,
-                                                    color: Colors.blueGrey,
-                                                    decoration: TextDecoration.underline),
-                                              ),
-                                            )),
+                                          onTap: () async {
+                                            final telScheme = 'tel:${snapshot.data['fields']['telephone_du_lieu']}';
+                                            if (await canLaunch(telScheme)) {
+                                              await launch(telScheme);
+                                            } else {
+                                              final Error error = ArgumentError('Could not launch $telScheme');
+                                              throw error;
+                                            }
+                                          },
+                                          child: Text(
+                                            snapshot.data['fields']['telephone_du_lieu'].toString(),
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.normal,
+                                                color: Colors.blueGrey,
+                                                decoration: TextDecoration.underline),
+                                          ),
+                                        )),
                                       ],
                                     ),
                                   ]),
@@ -215,9 +214,9 @@ class Detail extends StatelessWidget {
                                       ),
                                       RatingBar.builder(
                                         initialRating:
-                                        (snapshot.data.data().containsKey('ratings') && snapshot.data['ratings'][_firebaseUser.uid] != null)
-                                            ? double.parse(snapshot.data['ratings'][_firebaseUser.uid].toString())
-                                            : 0,
+                                            (snapshot.data.data().containsKey('ratings') && snapshot.data['ratings'][_firebaseUser.uid] != null)
+                                                ? double.parse(snapshot.data['ratings'][_firebaseUser.uid].toString())
+                                                : 0,
                                         minRating: 1,
                                         allowHalfRating: true,
                                         itemBuilder: (context, _) => const Icon(
