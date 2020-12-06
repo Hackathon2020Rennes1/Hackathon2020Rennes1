@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +32,7 @@ class ListOwnTourPage extends StatelessWidget {
           providers: [
             Provider<GlobalKey<FormState>>(create: (_) => GlobalKey<FormState>()),
             ChangeNotifierProvider<TextEditingController>(create: (_) => TextEditingController()),
+            FutureProvider<DocumentSnapshot>.value(value: FirebaseFirestore.instance.collection('users').doc(context.watch<User>().uid).get()),
           ],
           child: const ListOwnTourMain(),
         ),

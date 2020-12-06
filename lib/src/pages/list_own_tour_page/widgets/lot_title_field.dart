@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -44,9 +46,46 @@ class ListOwnTourTitleField extends StatelessWidget {
         const Padding(padding: EdgeInsets.only(top: 5)),
         RaisedButton.icon(
           color: Colors.green,
-          onPressed: () {
+          onPressed: () async {
             if (context.read<GlobalKey<FormState>>().currentState.validate()) {
-              // TODO PUBLIER DANS PUBLIQUE
+              final userSnapshot = context.read<DocumentSnapshot>();
+
+              if (userSnapshot.data() == null || !userSnapshot.data().containsKey('tour') || userSnapshot['tour']['events'] == null) {
+                const snackBar = SnackBar(
+                  content: Text("Pas d'évènements dans la liste"),
+                  backgroundColor: Colors.redAccent,
+                );
+                Scaffold.of(context).showSnackBar(snackBar);
+
+                return;
+              }
+
+              var events = <String>[];
+
+              if (userSnapshot.data().containsKey('tour') && userSnapshot['tour']['events'] != null) {
+                events = List<String>.from(userSnapshot['tour']['events'] as List<dynamic>);
+              }
+
+              if (events.isEmpty) {
+                const snackBar = SnackBar(
+                  content: Text("Pas d'évènements dans la liste"),
+                  backgroundColor: Colors.redAccent,
+                );
+                Scaffold.of(context).showSnackBar(snackBar);
+
+                return;
+              }
+
+              final parcours = {
+                'date': DateTime.now(),
+                'events': userSnapshot['tour']['events'],
+                'titre_parcours': context.read<TextEditingController>().text.toString(),
+                'username': context.read<User>().displayName,
+              };
+
+              await FirebaseFirestore.instance.collection('public_tour').add(parcours);
+              await FirebaseFirestore.instance.collection('users').doc(context.read<User>().uid).update({'tour.events': []});
+              Navigator.pop(context);
             }
           },
           icon: const Icon(Icons.add),

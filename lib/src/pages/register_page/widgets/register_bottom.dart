@@ -28,7 +28,7 @@ class RegisterBottom extends StatelessWidget {
                       pseudo: context.read<RegisterInputControllerModel>().pseudoController.text.trim(),
                       photoUrl: context.read<RegisterInputControllerModel>().photoUrlController.text.trim(),
                     )
-                    .then((value) {
+                    .then((value) async {
                   if (value == 'Signed up') {
                     // Ne fonctionne pas, mieux vaut utiliser un StatefulWidget et dispose()
                     //context.read<RegisterInputControllerModel>().dispose();
