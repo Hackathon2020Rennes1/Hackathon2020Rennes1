@@ -90,7 +90,7 @@ class flutterMapEventState extends State<flutterMapEvent> {
                         Expanded(
                             child:Container(
                             width:120 ,
-                            child:Text(e.name,overflow: TextOverflow.ellipsis,maxLines: 2,)
+                            child:Text(e.name,overflow: TextOverflow.ellipsis,maxLines: 2)
                           )
                         ),
                         Expanded(
@@ -108,7 +108,9 @@ class flutterMapEventState extends State<flutterMapEvent> {
                           MaterialPageRoute<Detail>(
                               builder: (context) => Detail(
                                 id: e.id,
-                              )));
+                              )
+                          )
+                      );
                       // do something
                     },
                   )
