@@ -1,6 +1,5 @@
 
 import 'package:fete_ta_science/src/pages/detail_page/model/event.dart';
-import 'package:fete_ta_science/src/pages/tour_page/widgets/event_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -11,39 +10,6 @@ import 'package:flutter_map/src/layer/marker_layer.dart';
 import '../detail.dart';
 
 
-
-
-class LocationLabel extends StatelessWidget {
-
-  LocationLabel(this.event,this.height);
-
-  EventMapData event;
-
-  double height;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        height: height,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children:[
-              Container(
-                  height:height-20,
-                  child:ListView(
-                      children:[
-                        Text(event.name),
-                        //Divider(color: Colors.grey, thickness: 2),
-                        //Text(event.description),
-                      ]
-                  )
-              ),
-              Divider(color: Colors.green, thickness: 4)
-            ],
-          ),
-        );
-  }
-}
 
 class flutterMapEvent extends StatefulWidget{
 

@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fete_ta_science/src/pages/detail_page/model/event.dart';
 import 'package:fete_ta_science/src/pages/detail_page/widgets/events_flutter_map.dart';
-import 'package:fete_ta_science/src/pages/tour_page/widgets/event_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
