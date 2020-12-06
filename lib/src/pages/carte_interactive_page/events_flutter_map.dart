@@ -43,13 +43,31 @@ class flutterMapEventState extends State<flutterMapEvent> {
               height: 300,
               child: GestureDetector(
                 child: Column(
-                  children: [
-                    Expanded(child: Container(width: 120, child: Text(e.name, overflow: TextOverflow.ellipsis, maxLines: 2))),
+                  children: widget.events.length < 10 ? [
                     Expanded(
-                        child: Icon(
-                      Icons.location_on,
-                      color: Colors.deepOrange,
-                    )),
+                        child:Container(
+                            width:120 ,
+                            child:Text(
+                              e.name,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              //style: TextStyle(backgroundColor: Colors.deepOrange),
+                            )
+                        )
+                    ),
+                    Expanded(
+                        child:Icon(
+                          Icons.location_on,
+                          color: Colors.deepOrange,
+                        )
+                    ),
+                  ] :[
+                    Expanded(
+                        child:Icon(
+                          Icons.location_on,
+                          color: Colors.deepOrange,
+                        )
+                    )
                   ],
                 ),
                 onTap: () {
