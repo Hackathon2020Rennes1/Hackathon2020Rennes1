@@ -14,7 +14,7 @@ class HomeSearchBar extends StatelessWidget {
       style: const TextStyle(color: Colors.white),
       decoration: const InputDecoration(
         hintStyle: TextStyle(color: Colors.white),
-        hintText: 'Recherche par mot clé',
+        hintText: 'Recherche',
         prefixIcon: Icon(Icons.search, color: Colors.white),
       ),
       keyboardType: TextInputType.text,

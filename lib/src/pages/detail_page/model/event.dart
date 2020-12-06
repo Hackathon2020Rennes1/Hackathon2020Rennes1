@@ -1,13 +1,10 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // on ne pend pas tous le DocummentSnapshot pour ne pas prendre trop de mémoire
-class EventMapData{
+class EventMapData {
+  EventMapData(this.name, this.latitude, this.longitude);
 
-  EventMapData(this.name,this.latitude,this.longitude);
-
-  EventMapData.fromDocumentSnapshot(DocumentSnapshot doc){
+  EventMapData.fromDocumentSnapshot(DocumentSnapshot doc) {
     Map<String, dynamic> data = doc.data();
     //print("EventMapData event data : " + data.toString());
 
@@ -29,7 +26,6 @@ class EventMapData{
         "] longitude=[" +
         longitude.toString() +
         "]");*/
-
   }
 
   String name;

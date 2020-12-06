@@ -8,6 +8,8 @@ import 'package:flutter_map/src/layer/marker_layer.dart' as ml;
 import 'package:latlong/latlong.dart' as lt;
 
 
+
+
 class LocationLabel extends StatelessWidget {
 
   LocationLabel(this.event,this.height);
@@ -45,8 +47,6 @@ class flutterMapEvent extends StatefulWidget{
   flutterMapEvent({
     @required this.events,
     @required this.bounds,
-    /*@required this.latitude,
-    @required this.longitude,*/
     this.onPositionCranged = null,
     this.onReady = null,
     Key key,
@@ -69,7 +69,6 @@ class flutterMapEventState extends State<flutterMapEvent> {
   var _markers = List<ml.Marker>();
 
   void updateMarkers(){
-    print("flutterMapEventState.updateMarkers");
     for(var e in widget.events){
       _markers.add(
           ml.Marker(
@@ -101,7 +100,7 @@ class flutterMapEventState extends State<flutterMapEvent> {
 
   /*@override
   void initState(){
-    updateMarkers();
+    update();
     super.initState();
   }*/
 
@@ -129,10 +128,7 @@ class flutterMapEventState extends State<flutterMapEvent> {
           }
       ),
       layers: [
-        TileLayerOptions(
-            urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-            subdomains: ['a', 'b', 'c']
-        ),
+        TileLayerOptions(urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", subdomains: ['a', 'b', 'c']),
         MarkerLayerOptions(
           markers: _markers,
         ),
