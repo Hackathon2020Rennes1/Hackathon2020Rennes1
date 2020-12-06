@@ -3,14 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Event {
-
-  Event.fromId(String id){
-    FirebaseFirestore.instance
-        .collection('events')
-        .doc(id)
-        .get()
-        .then((value) => data = value)
-    //.catchError(onError:)
+  Event.fromId(String id) {
+    FirebaseFirestore.instance.collection('events').doc(id).get().then((value) => data = value)
+        //.catchError(onError:)
         ;
   }
 
@@ -25,7 +20,6 @@ class Event {
   String title() {
     return getField('titre_fr').toString();
   }
-
 }
 
 class EventListWidget extends StatelessWidget {

@@ -35,24 +35,26 @@ class HomeDrawer extends StatelessWidget {
                 accountName:
                     _firebaseUser.displayName != null ? Text(_firebaseUser.displayName, style: const TextStyle(fontSize: 22)) : const Text(''),
                 accountEmail: _firebaseUser.email != null ? Text(_firebaseUser.email) : const Text(''),
-                currentAccountPicture: _firebaseUser.photoURL != null ? CachedNetworkImage(
-                  imageUrl: _firebaseUser.photoURL,
-                  progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
-                  imageBuilder: (context, imageProvider) => Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
-                    ),
-                  ),
-                  errorWidget: (context, url, error) => Container(
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(image: AssetImage('assets/images/profile/avatar-anonym.png'), fit: BoxFit.cover),
-                    ),
-                  ),
-                ) : CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/profile/avatar-anonym.png'),
-                ),
+                currentAccountPicture: _firebaseUser.photoURL != null
+                    ? CachedNetworkImage(
+                        imageUrl: _firebaseUser.photoURL,
+                        progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+                          ),
+                        ),
+                        errorWidget: (context, url, error) => Container(
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(image: AssetImage('assets/images/profile/avatar-anonym.png'), fit: BoxFit.cover),
+                          ),
+                        ),
+                      )
+                    : CircleAvatar(
+                        backgroundImage: AssetImage('assets/images/profile/avatar-anonym.png'),
+                      ),
                 otherAccountsPictures: [
                   IconButton(
                     icon: const Icon(Icons.power_settings_new),
@@ -71,4 +73,3 @@ class HomeDrawer extends StatelessWidget {
     );
   }
 }
-

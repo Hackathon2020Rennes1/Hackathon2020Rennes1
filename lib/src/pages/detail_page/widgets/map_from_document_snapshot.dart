@@ -13,7 +13,6 @@ class MapFromDocumentSnapshot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     // version google map
     //return GoogleMapForEvent(eventName: eventName, description: description, latitude: latitude, longitude: longitude);
 
@@ -21,7 +20,7 @@ class MapFromDocumentSnapshot extends StatelessWidget {
     //events.add(EventMapData.fromDocumentSnapshot(eventName,latitude,longitude));
     events.add(EventMapData.fromDocumentSnapshot(documentSnapshot));
 
-    return flutterMapEvent(events:events, latitude:events[0].latitude, longitude:events[0].longitude);
+    return flutterMapEvent(events: events, latitude: events[0].latitude, longitude: events[0].longitude);
   }
 }
 

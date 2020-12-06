@@ -41,7 +41,9 @@ class ListOwnTourBody extends StatelessWidget {
 
                   var userEvents = <String>[];
 
-                  if (userSnapshot.data.data() != null && userSnapshot.data.data().containsKey('tour') && userSnapshot.data['tour']['events'] != null) {
+                  if (userSnapshot.data.data() != null &&
+                      userSnapshot.data.data().containsKey('tour') &&
+                      userSnapshot.data['tour']['events'] != null) {
                     userEvents = List<String>.from(userSnapshot.data['tour']['events'] as List<dynamic>);
                   }
 
