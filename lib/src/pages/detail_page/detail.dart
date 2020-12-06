@@ -115,6 +115,7 @@ class Detail extends StatelessWidget {
                                             child: Text(
                                               snapshot.data['fields']['adresse'].toString(),
                                               style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[600]),
+
                                             )),
                                       ],
                                     ),
@@ -185,7 +186,7 @@ class Detail extends StatelessWidget {
                                         ),
                                         GestureDetector(
                                           onTap: () {
-                                            _launchURL('http://www.altecsciences.fr');
+                                            _launchURL(snapshot.data['fields']['site_web_du_lieu'].toString());
                                           },
                                           child: Text(
                                             snapshot.data['fields']['site_web_du_lieu'].toString(),
@@ -194,7 +195,7 @@ class Detail extends StatelessWidget {
                                                 fontWeight: FontWeight.normal,
                                                 color: Colors.blueGrey,
                                                 decoration: TextDecoration.underline),
-                                            overflow: TextOverflow.clip,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                       ],
