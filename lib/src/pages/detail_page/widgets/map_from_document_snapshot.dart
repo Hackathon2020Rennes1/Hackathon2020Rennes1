@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fete_ta_science/src/pages/detail_page/model/event.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 
 import 'flutter_map_for_an_event.dart';
+import 'package:latlong/latlong.dart';
 
 // parse documentSnapshot data and pass it to MapEvent
 class MapFromDocumentSnapshot extends StatelessWidget {
@@ -21,7 +23,12 @@ class MapFromDocumentSnapshot extends StatelessWidget {
     //events.add(EventMapData.fromDocumentSnapshot(eventName,latitude,longitude));
     events.add(EventMapData.fromDocumentSnapshot(documentSnapshot));
 
-    return flutterMapEvent(events:events, latitude:events[0].latitude, longitude:events[0].longitude);
+    return flutterMapEvent(
+        events:events,
+        bounds:LatLngBounds(
+          LatLng(events[0].latitude-1, events[0].longitude-1),
+          LatLng(events[0].latitude+1, events[0].longitude+1)
+    ));
   }
 }
 

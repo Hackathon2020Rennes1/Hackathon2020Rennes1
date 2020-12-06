@@ -21,9 +21,9 @@ class EventMapData{
     //String description = doc.get(FieldPath(['fields', 'description_fr'])).toString();
 
     /*print("MapFromDocumentSnapshot events eventName =[" +
-        eventName +
+        name +
         "] description = [" +
-        description +
+        //description +
         "] latitude=[" +
         latitude.toString() +
         "] longitude=[" +

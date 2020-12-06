@@ -8,8 +8,6 @@ import 'package:flutter_map/src/layer/marker_layer.dart' as ml;
 import 'package:latlong/latlong.dart' as lt;
 
 
-
-
 class LocationLabel extends StatelessWidget {
 
   LocationLabel(this.event,this.height);
@@ -46,17 +44,20 @@ class flutterMapEvent extends StatefulWidget{
 
   flutterMapEvent({
     @required this.events,
-    @required this.latitude,
-    @required this.longitude,
+    @required this.bounds,
+    /*@required this.latitude,
+    @required this.longitude,*/
     this.onPositionCranged = null,
+    this.onReady = null,
     Key key,
   }) : super(key: key);
-
-  final double latitude, longitude;
 
   List<EventMapData> events;
 
   void Function(MapPosition position, bool hasGesture) onPositionCranged;
+  void Function(MapController) onReady;
+
+  LatLngBounds bounds;
 
   @override
   State<flutterMapEvent> createState() => flutterMapEventState();
@@ -67,7 +68,8 @@ class flutterMapEventState extends State<flutterMapEvent> {
 
   var _markers = List<ml.Marker>();
 
-  void update(){
+  void updateMarkers(){
+    print("flutterMapEventState.updateMarkers");
     for(var e in widget.events){
       _markers.add(
           ml.Marker(
@@ -97,23 +99,32 @@ class flutterMapEventState extends State<flutterMapEvent> {
     }
   }
 
-  @override
+  /*@override
   void initState(){
-    update();
+    updateMarkers();
     super.initState();
-  }
+  }*/
+
+  MapController mapController = MapController();
 
   @override
   Widget build(BuildContext context) {
-
-    return FlutterMap(
+    updateMarkers(); // important
+    /*print("widget.bounds s="+widget.bounds.south.toString());
+    print("widget.bounds n="+widget.bounds.north .toString());
+    print("widget.bounds e="+widget.bounds.east .toString());
+    print("widget.bounds w="+widget.bounds.west .toString());*/
+    //mapController = MapController();
+    var fm = FlutterMap(
+      mapController: mapController,
       options: MapOptions(
-        center: lt.LatLng(widget.latitude, widget.longitude),
-        zoom: 13.0,
+          bounds:widget.bounds,
+          //center: lt.LatLng(widget.latitude, widget.longitude),
+          zoom: 13.0,
           onPositionChanged:(MapPosition position, bool hasGesture){
             if(widget.onPositionCranged!=null){
               widget.onPositionCranged(position,hasGesture);
-              update();
+              updateMarkers();
             }
           }
       ),
@@ -128,5 +139,12 @@ class flutterMapEventState extends State<flutterMapEvent> {
       ],
 
     );
+    mapController.onReady.then((result) { // i'm getting an error here
+      if(widget.onReady!=null){
+        widget.onReady(mapController);
+        updateMarkers();
+      }
+    });
+    return fm;
   }
 }
