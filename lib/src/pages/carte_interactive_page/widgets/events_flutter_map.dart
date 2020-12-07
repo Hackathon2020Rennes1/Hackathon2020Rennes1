@@ -7,7 +7,7 @@ import 'package:flutter_map/src/layer/marker_layer.dart' as ml;
 import 'package:latlong/latlong.dart' as lt;
 import 'package:flutter_map/src/layer/marker_layer.dart';
 
-import '../detail_page.dart';
+import '../../detail_page/detail_page.dart';
 
 
 
