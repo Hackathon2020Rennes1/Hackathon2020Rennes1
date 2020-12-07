@@ -22,36 +22,43 @@ class HomeBody extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
+
+          final listDocs = snapshot.data.docs
+              .where((document) =>
+          document['fields']['nom_du_lieu']
+              .toString()
+              .toLowerCase()
+              .contains(context.watch<TextEditingController>().text.trim().toLowerCase()) ||
+              document['fields']['thematiques']
+                  .toString()
+                  .toLowerCase()
+                  .contains(context.watch<TextEditingController>().text.trim().toLowerCase()) ||
+              document['fields']['resume_dates_fr']
+                  .toString()
+                  .toLowerCase()
+                  .contains(context.watch<TextEditingController>().text.trim().toLowerCase()) ||
+              document['fields']['mots_cles_fr']
+                  .toString()
+                  .toLowerCase()
+                  .contains(context.watch<TextEditingController>().text.trim().toLowerCase()) ||
+              document['fields']['titre_fr']
+                  .toString()
+                  .toLowerCase()
+                  .contains(context.watch<TextEditingController>().text.trim().toLowerCase()))
+              .toList();
+
           return Scrollbar(
-            child: ListView(
-              children: snapshot.data.docs
-                  .where((document) =>
-                      document['fields']['nom_du_lieu']
-                          .toString()
-                          .toLowerCase()
-                          .contains(context.watch<TextEditingController>().text.trim().toLowerCase()) ||
-                      document['fields']['thematiques']
-                          .toString()
-                          .toLowerCase()
-                          .contains(context.watch<TextEditingController>().text.trim().toLowerCase()) ||
-                      document['fields']['resume_dates_fr']
-                          .toString()
-                          .toLowerCase()
-                          .contains(context.watch<TextEditingController>().text.trim().toLowerCase()) ||
-                      document['fields']['mots_cles_fr']
-                          .toString()
-                          .toLowerCase()
-                          .contains(context.watch<TextEditingController>().text.trim().toLowerCase()) ||
-                      document['fields']['titre_fr']
-                          .toString()
-                          .toLowerCase()
-                          .contains(context.watch<TextEditingController>().text.trim().toLowerCase()))
-                  .map((document) {
+            child: ListView.builder(
+              itemCount: listDocs.length,
+              itemBuilder: (context, index) {
+                final DocumentSnapshot document = listDocs[index];
+
                 return Card(
                   child: ListTile(
                     leading: CachedNetworkImage(
                       imageUrl: document['fields']['apercu'].toString(),
-                      progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
+                      progressIndicatorBuilder: (context, url, downloadProgress) =>
+                          CircularProgressIndicator(value: downloadProgress.progress),
                       errorWidget: (context, url, error) => const Icon(Icons.error),
                     ),
                     contentPadding: const EdgeInsets.only(left: 10, top: 5, bottom: 5, right: 5),
@@ -88,14 +95,14 @@ class HomeBody extends StatelessWidget {
                           context,
                           MaterialPageRoute<Detail>(
                               builder: (context) => Detail(
-                                    id: document.id,
-                                  )));
+                                id: document.id,
+                              )));
                     },
                     title: document['fields']['titre_fr'] != null ? Text(document['fields']['titre_fr'].toString()) : const Text(''),
                     trailing: const Icon(Icons.arrow_forward_rounded),
                   ),
                 );
-              }).toList(),
+              },
             ),
           );
         },
